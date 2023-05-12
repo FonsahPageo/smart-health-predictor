@@ -12,26 +12,8 @@
 </head>
 
 <body>
-    <header>
-        <nav id="main-navbar">
-            <div class="logo">
-                <a href="index.html"><img src="images/phone-doctor.png" alt="Logo"></a>
-            </div>
-            <div>
-                <ul class="nav-links">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Contact</a></li>
-                    <li><a href="#">Reviews</a></li>
-                </ul>
-                <div class="burger">
-                    <div class="line"></div>
-                    <div class="line"></div>
-                    <div class="line"></div>
-                </div>
-            </div>
-        </nav>
-    </header>
+    <div w3-include-html="header.html"></div>
+
     <h2>Welcome to Smart Health Predictor</h2>
     <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloremque quisquam nostrum laborum, voluptates rerum
         culpa veniam quos consequuntur a rem distinctio autem soluta voluptatem nulla adipisci ea mollitia similique
@@ -66,52 +48,11 @@
         iste error harum saepe. Architecto facere asperiores, placeat iusto alias ut recusandae dignissimos nemo
         consequatur corrupti mollitia maxime doloremque dolore est dolorum! Explicabo doloremque eos tempore provident
         sint recusandae rem porro ullam.</p>
-
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h2 class="logo-text">Logo</h2>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                    et dolore magna aliqua.
-                </p>
-                <div class="contact">
-                    <span><i class="fas fa-phone"></i> &nbsp; 123-456-7890</span>
-                    <span><i class="fas fa-envelope"></i> &nbsp; info@example.com</span>
-                </div>
-                <div class="socials">
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-linkedin"></i></a>
-                </div>
-            </div>
-            <div class="footer-section links">
-                <h2>Quick Links</h2>
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Services</a></li>
-                    <li><a href="#">Contact</a></li>
-                    <li><a href="#">FAQ</a></li>
-                </ul>
-            </div>
-            <div class="footer-section contact-form">
-                <h2>Contact Us</h2>
-                <form action="#" method="post">
-                    <input type="email" name="email" class="text-input contact-input" placeholder="Your email address">
-                    <textarea name="message" class="text-input contact-input" placeholder="Your message"></textarea>
-                    <button type="submit" class="btn btn-big contact-btn">
-                        <i class="fas fa-envelope"></i>
-                        Send
-                    </button>
-                </form>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            &copy; 2023 | Designed by Ash Prince
-        </div>
-    </footer>
+    
+    <div w3-include-html="footer.html"></div>
+    <script>
+        includeHTML();
+    </script>
 </body>
 
 </html>
