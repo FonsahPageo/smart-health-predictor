@@ -1,27 +1,32 @@
 footer {
     background-color: #333;
     color: #fff;
-    padding: 80px 0;
+    padding: 80px ;
     padding: 20px;
+    justify-content: space-evenly;
 }
 
 .footer-content {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-evenly;
     margin-bottom: 50px;
 }
 
 .footer-section {
     flex: 1;
-    margin-right: 20px;
+    margin-right: 10px;
     margin-top: 0px;
+    max-width: 400px;
 }
 
-.about h2.logo-text {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
+.logo{
+    height: 80px;
+    /* width: 60px; */
+    margin-top: 10px;
+    padding: 10px;
 }
+
 
 .about p {
     font-size: 1.1rem;
@@ -102,4 +107,13 @@ footer {
     padding-top: 20px;
     border-top: 1px solid #555;
     font-size: 1.4rem;
+}
+
+@media screen and (max-width: 790px) {
+    .footer-content{
+        display: flex;
+        flex-direction: column;
+        column-gap: 30px;
+        padding: 20px;
+    }
 }

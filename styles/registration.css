@@ -50,6 +50,10 @@ input[type=password] {
     box-sizing: border-box;
 }
 
+.gender-select {
+    justify-content: space-around;
+}
+
 input[type=tel] {
     flex: 1;
     padding: 12px;
