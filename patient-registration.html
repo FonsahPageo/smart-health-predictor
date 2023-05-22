@@ -15,7 +15,7 @@
 <body>
     <!-- <?php include_once 'registration.php'; ?> -->
     <div class="container">
-        <form action="login.html" method="POST">
+        <form action="login.html" method="POST" class="reg-form">
             <h1>Sign Up Here For Free</h1>
             <label for="fname"><b>First Name</b></label>
             <input type="text" placeholder="Enter First Name" name="fname" required>
@@ -300,7 +300,7 @@
             <label for="confirm-password"><b>Confirm Password</b></label>
             <input type="password" placeholder="Confirm your Password" name="confirm-password" minlength="6" required>
 
-            <button type="submit" class="registerbtn">Register</button>
+            <button type="submit" class="registerbtn">Register <i class="bi bi-send"></i></button>
 
         </form>
     </div>
