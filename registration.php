@@ -1,16 +1,16 @@
-<?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  $username = $_POST["username"];
-  $email = $_POST["email"];
-  $password = $_POST["password"];
-  $confirm_password = $_POST["confirm_password"];
+<?php  
 
-  // Check if passwords match
-  if ($password != $confirm_password) {
-    $error = "Passwords do not match.";
-  } else {
-    // Passwords match, process registration request
-    // ...
-  }
+$servername = "localhost";
+$username = "username";
+$password = "password";
+$dbname = "smart_health";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
 }
+
 ?>

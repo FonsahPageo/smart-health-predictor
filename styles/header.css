@@ -52,6 +52,16 @@ header {
     transition: all 0.3s ease;
 }
 
+@media screen and (max-width:768px) {
+    .nav-links {
+        display: none;
+    }
+
+    .burger {
+        display: block;
+    }
+}
+
 .nav-active {
     display: flex !important;
     flex-direction: column;
@@ -78,7 +88,7 @@ header {
         background-color: #fff;
         padding: 10px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        /* display: none; */
+        display: none;
     }
 
     .nav-links li {

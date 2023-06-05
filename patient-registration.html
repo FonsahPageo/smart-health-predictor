@@ -9,13 +9,16 @@
     <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="styles/registration.css">
     <script src="scripts/script.js"></script>
-    <!-- <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-fy5bLAsZdUvWGl7jvJL2ZSdRb3dudpLb8UQGJQFJl/NgJ5FJmZ7OvG8JQZ7RtMB6LQGtSgJm9mXV6Fw2D7Vyg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://kit.fontawesome.com/275b79e2bf.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
-    <!-- <?php include_once 'registration.php'; ?> -->
+    <?php include_once 'registration.php'; ?>
     <div class="container">
-        <form action="login.html" method="POST" class="reg-form">
+        <form action="login.html" method="POST" class="reg-form" id="registration-form">
             <h1>Sign Up Here For Free</h1>
             <label for="fname"><b>First Name</b></label>
             <input type="text" placeholder="Enter First Name" name="fname" required>
@@ -300,7 +303,8 @@
             <label for="confirm-password"><b>Confirm Password</b></label>
             <input type="password" placeholder="Confirm your Password" name="confirm-password" minlength="6" required>
 
-            <button type="submit" class="registerbtn">Register <i class="bi bi-send"></i></button>
+            <button type="submit" class="registerbtn"><a href="login.html">Register <i class="fa-regular fa-paper-plane-top"></i></a></button>
+            <button type="submit">Already have an account? Log in <i class="fa-regular fa-paper-plane-top"></button>
 
         </form>
     </div>

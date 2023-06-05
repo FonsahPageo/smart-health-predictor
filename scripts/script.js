@@ -1,3 +1,56 @@
+// registrattion form validation
+const form = document.getElementById('registration-form');
+const fname = document.getElementById('fname');
+const lname = document.getElementById('lname');
+const email = document.getElementById('email');
+const username = document.getElementById('username');
+const phone = document.getElementById('phone');
+const country = document.getElementById('country');
+const password = document.getElementById('password');
+
+form.addEventListener('submit', (event) => {
+  event.preventDefault();
+
+  if (!fname.checkValidity()) {
+    alert('Please enter a valid first name.');
+    return;
+  }
+
+  if (!lname.checkValidity()) {
+    alert('Please enter a valid last name.');
+    return;
+  }
+
+  if (!email.checkValidity()) {
+    alert('Please enter a valid email address.');
+    return;
+  }
+
+  if (!username.checkValidity()) {
+    alert('Please enter a valid username.');
+    return;
+  }
+
+  if (!phone.checkValidity()) {
+    alert('Please enter a valid phone number.');
+    return;
+  }
+
+  if (!country.checkValidity()) {
+    alert('Please enter a valid country.');
+    return;
+  }
+
+  if (!password.checkValidity()) {
+    alert('Please enter a valid password.');
+    return;
+  }
+
+  // If all fields are valid, submit the form
+  form.submit();
+});
+
+// login form validation
 const passwordInput = document.getElementById("password");
 const passwordError = document.getElementById("password-error");
 
@@ -13,14 +66,7 @@ passwordInput.addEventListener("input", function () {
     }
 });
 
-const burger = document.querySelector('.burger');
-const nav = document.querySelector('.nav-links');
-
-burger.addEventListener('click', () => {
-    nav.classList.toggle('nav-active');
-    burger.classList.toggle('active');
-});
-
+// link to header and footer
 function includeHTML() {
     var z, i, elmnt, file, xhttp;
     /* Loop through a collection of all HTML elements: */

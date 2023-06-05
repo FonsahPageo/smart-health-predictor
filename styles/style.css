@@ -8,6 +8,12 @@ body {
     margin: 120px 20px 20px 20px;
 }
 
+.content{
+    /* background-image: url('/images/health-2.png'); */
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 #main {
     display: flex;
     flex-direction: column;
@@ -17,10 +23,15 @@ body {
 }
 
 .section-1 {
+    background-image: url('/images/health-2.png');
+    background-repeat: no-repeat;
+    background-size: cover;
     display: flex;
     padding: 20px;
     gap: 20px;
     margin: 10px;
+    height: 50vh;
+    
 }
 
 .box {
@@ -38,7 +49,7 @@ form {
 }
 
 .container {
-	max-width: 500px;
+	max-width: 700px;
 	margin: 0 auto;
 	padding: 20px;
 }
@@ -54,7 +65,7 @@ form {
 
 button[type="submit"],
 button[type="button"] {
-	background-color: #4CAF50;
+	background-color: #33a0a0;
     color: white;
     padding: 12px 20px;
     border: none;
@@ -86,6 +97,16 @@ input[type=tel]{
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
+}
+
+input[type=file]{
+    display: flex;
+    justify-content: center;
+    padding: 50px;
+    width: 200px;
+    height: 200px;
+    border: 2px solid #33a0a0;
+    border-radius: 500px;
 }
 
 
