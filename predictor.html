@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disease Prediction</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Disease Prediction</h1>
+        <p>Input your symptoms</p>
+        <form action="/predict" method="POST">
+            <label for="symptom1">Symptom 1:</label>
+            <input type="text" id="symptom1" name="symptom1"><br><br>
+            <label for="symptom2">Symptom 2:</label>
+            <input type="text" id="symptom2" name="symptom2"><br><br>
+            <label for="symptom3">Symptom 3:</label>
+            <input type="text" id="symptom3" name="symptom3"><br><br>
+            <button type="button" onclick="addSymptom()">Add Symptom</button>
+            <button type="submit">Predict</button>
+        </form>
+    </div>
+
+    <script>
+        function addSymptom() {
+            var div = document.getElementById("symptoms");
+            var count = div.getElementsByTagName("input").length / 2 + 1; // divide by 2 because there are two input fields per line
+            var label = document.createElement("label");
+            label.setAttribute("for", "symptom" + count);
+            label.innerHTML = "Symptom " + count + ":";
+            var input = document.createElement("input");
+            input.setAttribute("type", "text");
+            input.setAttribute("id", "symptom" + count);
+            input.setAttribute("name", "symptom" + count);
+            div.appendChild(label);
+            div.appendChild(input);
+            div.appendChild(document.createElement("br"));
+            div.appendChild(document.createElement("br"));
+        }
+    </script>
+</body>
+
+</html>
