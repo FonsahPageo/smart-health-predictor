@@ -5,12 +5,40 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="styles/style.css">
-    <link rel="stylesheet" href="styles/footer.css">
+    <title>Prediction results</title>
+    <link rel="stylesheet" href="../styles/style.css">
+    <!-- <script src="scripts/script.js"></script> -->
+    <link rel="stylesheet" href="../styles/header.css">
+    <link rel="stylesheet" href="../styles/footer.css">
 </head>
 
 <body>
+    <!-- <div w3-include-html="header.html"></div> -->
+    <header>
+        <nav id="main-navbar">
+            <div class="logo">
+                <a href="index.html"><img src="images/phone-doctor.png" alt="Logo"></a>
+            </div>
+            <div>
+                <ul class="nav-links">
+                    <li><a href="../index.html"><i class="fa-solid fa-house"></i> Home</a></li>
+                    <li><a href="template/predictor.html">Predictor</a></li>
+                    <li><a href="consultation.html">Consultation</a></li>
+                    <li><a href="news">Newsletter</a></li>
+                    <li><a href="patient.html"><i class="fa-solid fa-user"></i> Account</a></li>
+                </ul>
+                <div class="burger">
+                    <div class="line"></div>
+                    <div class="line"></div>
+                    <div class="line"></div>
+                </div>
+            </div>
+
+        </nav>
+    </header>
+
+    <h2>Prediction results</h2>
+    <p>The predicted disease is: {{ prediction }}</p>
 
     <footer>
         <div class="footer-content">
@@ -35,7 +63,7 @@
                 <h2>Quick Links</h2>
                 <ul>
                     <li><a href="index.html">Home</a></li>
-                    <li><a href="template/predictor.html">Predictor</a></li>
+                    <li><a href="../predictor.html">Predictor</a></li>
                     <li><a href="consult.html">Consultation</a></li>
                     <li><a href="news.html">Newsletter</a></li>
                     <li><a href="patient.html">Account</a></li>
@@ -54,10 +82,14 @@
             </div>
         </div>
         <div class="footer-bottom">
-           Copyright &copy; 2023 | Designed by Fonsah Pageo
+            Copyright &copy; 2023 | Designed by Fonsah Pageo
         </div>
     </footer>
 
-</body>
+    <!-- <div w3-include-html="footer.html"></div>
+    <script>
+        includeHTML();
+    </script>
+</body> -->
 
 </html>

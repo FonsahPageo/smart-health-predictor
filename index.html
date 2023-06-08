@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Smart Health Predictor</title>
-    <link rel="stylesheet" href="/styles/style.css">
+    <link rel="stylesheet" href="styles/style.css">
     <script src="scripts/script.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         integrity="sha512-fy5bLAsZdUvWGl7jvJL2ZSdRb3dudpLb8UQGJQFJl/NgJ5FJmZ7OvG8JQZ7RtMB6LQGtSgJm9mXV6Fw2D7Vyg=="
@@ -26,22 +26,21 @@
 
         <section class="section-1">
             <div class="box">
-                <form action="predictor.html" method="POST">
+                <form action="template/predictor.html">
                     <h2>What are you feeling today? </h2>
                     <p>Click here to interact with the diagnosis system</p>
-
-                    <button type="submit"><a href="predictor.html"> Submit <i class="fa-regular fa-paper-plane-top"></i></button>
+                    <button type="submit">Submit<i class="fa-regular fa-paper-plane-top"></i></button>
                 </form>
             </div>
             <div class="box">
-                <form action="consult.html" method="POST">
-                    <h2>Talk with a Doctor specialiazed in your case</h2>
+                <form action="consultation.html">
+                    <h2>Talk with a Doctor specialized in your case</h2>
                     <p>Click here to see various doctors you can talk to</p>
                     <button type="submit">Submit <i class="fa-regular fa-paper-plane-top"></i></button>
                 </form>
             </div>
             <div class="box">
-                <form action="news.html" method="POST">
+                <form action="news.html">
                     <h2>Health tips and health news</h2>
                     <p>Click here for recent events and tips for a health lifestyle</p>
                     <button type="submit">Submit <i class="fa-regular fa-paper-plane-top"></i></button>
@@ -49,17 +48,20 @@
             </div>
         </section>
 
-        <p>If you find yourself in need of medical attention and you don't know what to do,
-            our system will be able to help anaylyze and interpret your health situation. <br>
-            But the results you obtain from here are not conclcusive and can never compare to the diagnosis of
-            a doctor or physician. Therefore, you are stringly advised to visit a hospital or clinic for proper checkup
-            and
-            diagnosis with tests and examinatiions carried out to accurately determine your illness.</p>
-        <p> Also, we can help you find a doctor that will repsond to you and give you instant medical advice
-            and directives on what to do next or where to go.</p>
-        <p>We bring you daily tips that can improve your health and inform you of the latest happenigs in the world of
-            medicine so stay tuned to our news section and always stay updated.
-        </p>
+        <div>
+            <p>If you find yourself in need of medical attention and you don't know what to do,
+                our system will be able to help anaylyze and interpret your health situation. <br>
+                But the results you obtain from here are not conclcusive and can never compare to the diagnosis of
+                a doctor or physician. Therefore, you are strongly advised to visit a hospital or clinic for proper
+                checkup
+                and diagnosis with tests and examinatiions carried out to accurately determine your illness.</p>
+            <p> Also, we can help you find a doctor that will repsond to you and give you instant medical advice
+                and directives on what to do next or where to go.</p>
+            <p>We bring you daily tips that can improve your health and inform you of the latest happenings in the world
+                of
+                medicine so stay tuned to our news section and always stay updated.
+            </p>
+        </div>
     </div>
 
     <div w3-include-html="footer.html"></div>
