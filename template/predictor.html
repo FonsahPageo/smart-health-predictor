@@ -10,6 +10,8 @@
     <!-- <script src="scripts/script.js"></script> -->
     <link rel="stylesheet" href="../styles/header.css">
     <link rel="stylesheet" href="../styles/footer.css">
+    <script src="https://kit.fontawesome.com/275b79e2bf.js" crossorigin="anonymous"></script>
+
 </head>
 
 <body>
@@ -17,7 +19,7 @@
     <header>
         <nav id="main-navbar">
             <div class="logo">
-                <a href="index.html"><img src="images/phone-doctor.png" alt="Logo"></a>
+                <a href="index.html"><img src="../images/phone-doctor.png" alt="Logo"></a>
             </div>
             <div>
                 <ul class="nav-links">
@@ -37,26 +39,26 @@
         </nav>
     </header>
 
-    <!-- <div class="container">
+    <div class="container">
         <h1>Disease Prediction</h1>
         <form action="/predict" id="myForm">
             <div id="inputFields">
-                <h2>Click here to enter your symptoms</h2>
+                <h2>Click here to enter your symptoms (at least three)</h2>
                 <button id="addButton" type="button">Add Symptom</button>
                 <button type="submit">Predict</button>
             </div>
         </form>
-    </div> -->
+    </div>
 
-    <div>This is simple test to get data from a backend</div>
+    <!-- <div>This is simple test to get data from a backend</div>
     <div><span>Last update: </span><span id="time-container"></span></div>
     <button onclick="getUsers()">Get user data</button>
-    <div id="result-container"></div>
+    <div id="result-container"></div> -->
 
     <footer>
         <div class="footer-content">
             <div class="footer-section">
-                <a href="index.html"><img src="images/phone-doctor.png" class="logo"></a>
+                <a href="index.html"><img src="../images/phone-doctor.png" class="logo"></a>
                 <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
                     et dolore magna aliqua.
@@ -109,7 +111,7 @@
         });
     </script>
 
-    <script>
+    <!-- <script>
         var xhr = null;
         getXmlHttpRequestObject = function () {
             if (!xhr) {
@@ -145,10 +147,10 @@
         (function () {
             getDate();
         })();
-    </script>
+    </script> -->
 
 
-    <!-- <script>
+    <script>
         const form = document.getElementById("myForm");
         const inputFields = document.getElementById("inputFields");
         const addButton = document.getElementById("addButton");
@@ -180,15 +182,7 @@
             counter++;
         });
 
-        var xhr = null;
-        getXmlHttpRequestObject = function () {
-            if (!xhr) {
-                // Create a new XMLHttpRequest object
-                xhr = new XMLHttpRequest();
-            }
-            return xhr;
-        };
-    </script> -->
+    </script>
 
     <!-- <div w3-include-html="footer.html"></div>
     <script>

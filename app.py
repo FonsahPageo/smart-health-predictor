@@ -28,17 +28,28 @@ def users():
             })
             return flask.jsonify(data)
         
+    # if request.method == "POST":
+    #     received_data = request.get_json()
+    #     print(f"received data: {received_data}")
+    #     message = received_data['data']
+    #     return_data = {
+    #         "status": "success",
+    #         "message": f"received: {message}"
+    #     }
     if request.method == "POST":
         received_data = request.get_json()
         print(f"received data: {received_data}")
         message = received_data['data']
+        # prediction = model.predict([message])
+        prediction = model.predict(["Cough,Fatigue,Vomiting"]   )
         return_data = {
             "status": "success",
-            "message": f"received: {message}"
+            "message": f"received: {message}",
+            "response": prediction[0]
         }
         return flask.Response(response=json.dumps(return_data), status=201)
 
-@app.route('/predict', methods=['POST'])
+@app.route('/predict', methods=['GET,POST'])
 def predict():
     print("Prediction endpoint reached...")
     if request.method == "POST":
@@ -47,7 +58,8 @@ def predict():
         message = received_data['data']
         return_data = {
             "status": "success",
-            "message": f"received: {message}"
+            "message": f"received: {message}",
+            "response": "100%"
         }
         return flask.Response(response=json.dumps(return_data), status=201)
     # input_data = [data['symptom1'], data['symptom2'], data['symptom3']]

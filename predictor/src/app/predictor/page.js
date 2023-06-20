@@ -55,6 +55,7 @@ export default function Home() {
         const dataDiv = document.getElementById('sent-data-container');
         // Set current data text
         dataDiv.innerHTML = xhr.responseText;
+        console.log(JSON.parse(xhr.responseText));
       }
     }
 
@@ -75,14 +76,15 @@ export default function Home() {
       xhr.send(JSON.stringify({ "data": dataToSend }));
     }
     //selecting all inputs 
-    form.addEventListener("submit", function () {
+    form.addEventListener("submit", async function () {
       const allInputs = document.querySelectorAll('form input');
       const dataToSend = [];
       // Storing input values from the form
-      Array.from(allInputs).forEach(input => dataToSend.push(input.value))
+      Array.from(allInputs).forEach(input => input.value.length > 0 && dataToSend.push(input.value))
       // passing data to model
       try {
-        sendData(dataToSend)
+        const response = await sendData(dataToSend)
+        console.log(response);
 
       }
       catch (e) {
@@ -135,11 +137,11 @@ export default function Home() {
       }}>
         <div id="inputFields">
           <h2>Click here to enter your symptoms</h2>
-          <>
+          {/* <>
             <label>Symptom 1:</label>
             <input type="text" name="symptom1" />
             <button className="deleteButton">Delete</button>
-          </>
+          </> */}
 
           <button id="addButton" type="button">Add Symptom</button>
           <button type="submit">Predict</button>
@@ -149,6 +151,7 @@ export default function Home() {
       <div><span>Last update: </span><span id="time-container"></span></div>
       <button id='userBtn'>Get user data</button>
       <div id="result-container"></div>
+      <div id="sent-data-container"></div>
     </div>
 
 

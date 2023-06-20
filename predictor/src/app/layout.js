@@ -14,7 +14,7 @@ export default function RootLayout({ children }) {
       <header>
         <nav id="main-navbar">
             <div className="logo">
-                <a href="index.html"><Image src="/phone-doctor.png" width={100} height={100} alt='logo' className="logo"/></a>
+                <a href="index.html"><Image src="/phone-doctor.png" width={80} height={100} alt='logo' className="logo"/></a>
             </div>
             <div>
                 <ul className="nav-links">
