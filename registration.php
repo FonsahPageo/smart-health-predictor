@@ -9,10 +9,11 @@
     $gender=htmlentities($_POST["gender"]);
     $password= htmlentities($_POST["password"]);
 
-    $insert= "INSERT into patients (FirstName,LastName,email,Username,CountryCode,PhoneNumber,Gender,Password)
-     VALUES ('$fname','$lname','$email','$username','$code','$phone','$gender','" . md5($password) . "')";
+    // $insert= "INSERT into patients (Firstname,Lastname,Email,Username,CountryCode,PhoneNumber,Gender,Password)
+    //  VALUES ('$fname','$lname','$email','$username','$code','$phone','$gender','" . md5($password) . "')";
+     $insert= "INSERT into patients (Firstname,Lastname,Email,Username,CountryCode,PhoneNumber,Gender,Password)
+     VALUES ('$fname','$lname','$email','$username','$code','$phone','$gender','$password')";
     $result   = mysqli_query($con, $insert);
-    
 
     if ($result==1) {
         echo "<div class='form'>
