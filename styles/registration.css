@@ -41,7 +41,6 @@ select {
     border-radius: 4px;
     background-color: #fff;
     appearance: none;
-    background-image: url('arrow-down.png');
     background-repeat: no-repeat;
     background-position: right;
     background-size: 20px;
