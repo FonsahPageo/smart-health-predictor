@@ -6,17 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign up</title>
-    <link rel="stylesheet" href="../styles/style.css">
-    <link rel="stylesheet" href="../styles/registration.css">
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/registration.css">
     <script src="scripts/script.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-        integrity="sha512-fy5bLAsZdUvWGl7jvJL2ZSdRb3dudpLb8UQGJQFJl/NgJ5FJmZ7OvG8JQZ7RtMB6LQGtSgJm9mXV6Fw2D7Vyg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <script src="https://kit.fontawesome.com/275b79e2bf.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
-    <!-- <?php include_once 'registration.php'; ?> -->
     <div class="container">
         <form method="POST" action="registration.php" id="registration-form">
             <h1>Sign Up Here For Free</h1>
@@ -32,7 +29,7 @@
             <label for="username"><b>Username</b></label>
             <input type="text" placeholder="Enter Username" name="username" minlength="5" required>
 
-            <label for="phone"><b>Country and Phone Number</b></label>
+            <label for="country-code"><b>Country</b></label>
             <div class="phone-input">
                 <select name="country-code" id="country-code" required>
                     <option value="">Country</option>
@@ -288,8 +285,10 @@
                     <option value="260">Zambia +260</option>
                     <option value="263">Zimbabwe +263</option>
                 </select>
-                <input type="tel" placeholder="Enter Phone Number" name="phone" id="phone" required>
             </div><br>
+
+            <label for="phone">Phone Number</label>
+            <input type="tel" placeholder="Enter Phone Number" name="phone" required>
 
             <label for="gender"><b>Gender</b></label>
             <div class="gender-select">
@@ -304,7 +303,7 @@
             <input type="password" placeholder="Confirm your Password" name="confirm-password" minlength="6" required>
 
             <button type="submit" class="registerbtn">Register <i class="fa-regular fa-paper-plane-top"></i></a></button>
-            <button type="submit">Already have an account? Log in <i class="fa-regular fa-paper-plane-top"></button>
+            <button type="submit"><a href="login.html">Already have an account? Log in </a><i class="fa-regular fa-paper-plane-top"></button>
 
         </form>
     </div>
