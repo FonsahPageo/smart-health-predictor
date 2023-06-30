@@ -10,13 +10,12 @@
     <!-- <script src="scripts/script.js"></script> -->
     <link rel="stylesheet" href="../styles/header.css">
     <link rel="stylesheet" href="../styles/footer.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://kit.fontawesome.com/275b79e2bf.js" crossorigin="anonymous"></script>
 
 </head>
 
 <body>
-    <!-- <div w3-include-html="header.html"></div> -->
+    <div w3-include-html="header.html"></div>
     <header>
         <nav id="main-navbar">
             <div class="logo">
@@ -25,9 +24,9 @@
             <div>
                 <ul class="nav-links">
                     <li><a href="../index.html"><i class="fa-solid fa-house"></i> Home</a></li>
-                    <li><a href="predictor.html">Predictor</a></li>
-                    <li><a href="../consultation.html">Consultation</a></li>
-                    <li><a href="../news">Newsletter</a></li>
+                    <li><a href="predictor.html"><i class="fa-solid fa-heart-circle-check"></i> Predictor</a></li>
+                    <li><a href="../consultation.html"><i class="fa-sharp fa-solid fa-hospital-user"></i> Consultation</a></li>
+                    <li><a href="../news.html"><i class="fa-solid fa-newspaper"></i> Newsletter</a></li>
                     <li><a href="../patient.html"><i class="fa-solid fa-user"></i> Account</a></li>
                 </ul>
                 <div class="burger">
@@ -45,8 +44,8 @@
         <form action="/predict" id="myForm">
             <div id="inputFields">
                 <h2>Click here to enter your symptoms (at least three)</h2>
-                <button id="addButton" type="button">Add Symptom</button>
-                <button type="submit">Predict</button>
+                <button id="addButton" type="button">Add Symptom <i class="fa-solid fa-plus"></i></button>
+                <button type="submit">Predict <i class="fa-solid fa-check"></i></button>
             </div>
         </form>
     </div>
@@ -91,8 +90,7 @@
                     <input type="email" name="email" class="text-input contact-input" placeholder="Your email address">
                     <textarea name="message" class="text-input contact-input" placeholder="Your message"></textarea>
                     <button type="submit" class="btn btn-big contact-btn">
-                        <i class="fas fa-envelope"></i>
-                        Send
+                        Send <i class="fas fa-envelope"></i>
                     </button>
                 </form>
             </div>
