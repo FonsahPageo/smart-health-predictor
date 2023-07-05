@@ -13,7 +13,8 @@
 </head>
 
 <body>
-    <div w3-include-html="header.html"></div>
+    <!-- <div w3-include-html="header.html"></div> -->
+    {% include 'header.html' %}
 
     <div class="content">
         <div id="main">
@@ -62,10 +63,11 @@
         </div>
     </div>
 
-    <div w3-include-html="footer.html"></div>
+    {% include 'footer.html' %}
+    <!-- <div w3-include-html="footer.html"></div>
     <script>
         includeHTML();
-    </script>
+    </script> -->
 </body>
 
 </html>
