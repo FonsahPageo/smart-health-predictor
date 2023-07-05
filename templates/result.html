@@ -14,16 +14,21 @@
     <!-- <div w3-include-html="templates/header.html"></div> -->
     <!-- <iframe src="header.html" frameborder="0"></iframe> -->
     {% include 'header.html' %}
-    
-    <h2>Prediction results</h2>
-    <!-- <p>RF Model Prediction: {{ rf_prediction }}</p>
-    <p>Naive Bayes Model Prediction: {{ nb_prediction }}</p>
-    <p>SVM Model Prediction: {{ svm_prediction }}</p>
-    <p>Final Prediction: {{ final_prediction }}</p> -->
 
-    <p>The predicted disease is: {{ prediction }}</p>
+    <div class="container">
+        <h2>Prediction results</h2>
+        <p>The predicted disease is: {{ prediction }}</p>
 
-    
+        <h2>Note!!!</h2>
+        <p>The predictor will show you the results of the prediction made by different models, hence different possible
+            illnesses that you could be suffering from. </p>
+        <p>Thus, the results gotten from here are not conclusive so you should go to the the nearest medical facility
+            for proper checkup and follow up on your condition as determined by lab tests.</p>
+        <p>Choose a doctor specialized in your case for better diagnosis</p>
+        
+    </div>
+
+
     {% include 'footer.html' %}
     <!-- <div w3-include-html="templates/footer.html"></div>
     <script>
