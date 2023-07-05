@@ -38,7 +38,10 @@
     </header>
 
     <h2>Prediction results</h2>
-    <p>The predicted disease is: {{ prediction }}</p>
+    <p>RF Model Prediction: {{ prediction.rf_prediction }}</p>
+    <p>Naive Bayes Model Prediction: {{ prediction.nb_prediction }}</p>
+    <p>SVM Model Prediction: {{ prediction.svm_prediction }}</p>
+    <p>Final Prediction: {{ prediction.final_prediction }}</p>
 
     <footer>
         <div class="footer-content">

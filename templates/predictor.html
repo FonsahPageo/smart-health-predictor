@@ -41,19 +41,14 @@
 
     <div class="container">
         <h1>Disease Prediction</h1>
-        <form action="/predict" id="myForm">
+        <form method="POST" action="{{ url_for('predict') }}" id="myForm">
             <div id="inputFields">
-                <h2>Click here to enter your symptoms (at least three)</h2>
+                <h2>Click here to enter your symptoms (at least five)</h2>
                 <button id="addButton" type="button">Add Symptom <i class="fa-solid fa-plus"></i></button>
-                <button type="submit">Predict <i class="fa-solid fa-check"></i></button>
+                <button type="submit"  value="Submit">Predict <i class="fa-solid fa-check"></i></button>
             </div>
         </form>
     </div>
-
-    <!-- <div>This is simple test to get data from a backend</div>
-    <div><span>Last update: </span><span id="time-container"></span></div>
-    <button onclick="getUsers()">Get user data</button>
-    <div id="result-container"></div> -->
 
     <footer>
         <div class="footer-content">
@@ -110,45 +105,7 @@
         });
     </script>
 
-    <!-- <script>
-        var xhr = null;
-        getXmlHttpRequestObject = function () {
-            if (!xhr) {
-                // Create a new XMLHttpRequest object 
-                xhr = new XMLHttpRequest();
-            }
-            return xhr;
-        };
-        function dataCallback() {
-            // Check response is ready or not
-            if (xhr.readyState == 4 && xhr.status == 200) {
-                console.log("User data received!");
-                getDate();
-                dataDiv = document.getElementById('result-container');
-                // Set current data text
-                dataDiv.innerHTML = xhr.responseText;
-            }
-        }
-        function getUsers() {
-            console.log("Get users...");
-            xhr = getXmlHttpRequestObject();
-            xhr.onreadystatechange = dataCallback;
-            // asynchronous requests
-            xhr.open("GET", "http://localhost:6969/users", true);
-            // Send the request over the network
-            xhr.send(null);
-        }
-        function getDate() {
-            date = new Date().toString();
-            document.getElementById('time-container').textContent
-                = date;
-        }
-        (function () {
-            getDate();
-        })();
-    </script> -->
-
-
+    <!--function for add/delete symptom  -->
     <script>
         const form = document.getElementById("myForm");
         const inputFields = document.getElementById("inputFields");
@@ -163,7 +120,8 @@
 
             const input = document.createElement("input");
             input.setAttribute("type", "text");
-            input.setAttribute("name", `symptom${counter}`);
+            input.setAttribute("name", `symptoms`);
+            input.setAttribute("id", `symptoms`);
 
             const deleteButton = document.createElement("button");
             deleteButton.className = "deleteButton";
