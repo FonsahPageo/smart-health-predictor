@@ -6,14 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prediction results</title>
-    <link rel="stylesheet" href="../styles/style.css">
-    <script src="script.js"></script>
-    <link rel="stylesheet" href="../styles/header.css">
-    <link rel="stylesheet" href="../styles/footer.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script>
 </head>
 
 <body>
-    <div w3-include-html="header.html"></div>
+    <!-- <div w3-include-html="templates/header.html"></div> -->
+    <!-- <iframe src="header.html" frameborder="0"></iframe> -->
+    {% include 'header.html' %}
     
     <h2>Prediction results</h2>
     <!-- <p>RF Model Prediction: {{ rf_prediction }}</p>
@@ -23,7 +23,8 @@
 
     <p>The predicted disease is: {{ prediction }}</p>
 
-    <div w3-include-html="footer.html"></div>
+    <div w3-include-html="templates/footer.html"></div>
+    {% include 'footer.html' %}
     <script>
         includeHTML();
     </script>

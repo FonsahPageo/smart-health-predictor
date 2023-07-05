@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title></title>
-    <link rel="stylesheet" href="../styles/header.css">
-    <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='header.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='footer.css') }}">
     <script src="https://kit.fontawesome.com/275b79e2bf.js" crossorigin="anonymous"></script>
 </head>
 
@@ -16,7 +16,7 @@
     <header>
         <nav id="main-navbar">
             <div class="logo">
-                <a href="index.html"><img src="../images/phone-doctor.png" alt="Logo"></a>
+                <img src="{{ url_for('static', filename='images/phone-doctor.jpg') }}" class="logo" alt="Logo">
             </div>
             <div>
                 <ul class="nav-links">

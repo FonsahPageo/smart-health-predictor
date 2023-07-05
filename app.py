@@ -145,7 +145,7 @@ def predict():
         # Render a template with the prediction results
         return render_template('result.html', prediction=prediction)
     else:
-        return render_template('index.html')
+        return render_template('predictor.html')
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
