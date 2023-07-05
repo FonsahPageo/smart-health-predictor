@@ -17,6 +17,7 @@ from sklearn.metrics import classification_report, accuracy_score, confusion_mat
 import matplotlib.pyplot as plt
 import seaborn as sns
 
+# load the training and testing dataset
 train_data = pd.read_csv("models/Training.csv").dropna(axis = 1)
 test_data =pd.read_csv("models/Testing.csv").dropna(axis = 1)
 
@@ -121,16 +122,12 @@ def predictDisease(symptoms):
     # making final prediction by taking mode of all predictions
     final_prediction = mode([rf_prediction, nb_prediction, svm_prediction])
     predictions = {
-        "rf_model_prediction": rf_prediction,
-        "naive_bayes_prediction": nb_prediction,
-        "svm_model_prediction": svm_prediction,
-        "final_prediction": final_prediction
+        "RF model prediction": rf_prediction,
+        "Naive Bayes prediction": nb_prediction,
+        "SVM model prediction": svm_prediction,
+        "Final prediction": final_prediction
     }
     return predictions
-
-# Testing the function
-
-# print(predictDisease("Itching,Skin Rash,Nodal Skin Eruptions"))
 
 app = Flask(__name__)
 
@@ -148,7 +145,7 @@ def predict():
         # Render a template with the prediction results
         return render_template('result.html', prediction=prediction)
     else:
-        return render_template('predictor.html')
+        return render_template('index.html')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
