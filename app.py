@@ -131,15 +131,40 @@ def predictDisease(symptoms):
 
 app = Flask(__name__)
 
-@app.route('/')
-def home():
+@app.route('/registration')
+def registration():
+    return render_template('patient-registration.html')
+
+@app.route('/login')
+def login():
+    return render_template('login.html')
+
+@app.route('/index')
+def index():
+    return render_template('index.html')
+
+@app.route('/consultation')
+def consultation():
+    return render_template('consultation.html')
+
+@app.route('/news')
+def news():
+    return render_template('news.html')
+
+@app.route('/patient')
+def patient():
+    return render_template('patient.html')
+
+@app.route('/predictor')
+def predictor():
     return render_template('predictor.html')
 
 @app.route('/predict', methods=['GET', 'POST'])
 def predict():
     if request.method == 'POST':
         # Get the input data from the form
-        symptoms = request.form['symptoms']
+        symptom_list = request.form.getlist('symptoms')
+        symptoms = ', '.join(symptom_list)
         # Make a prediction using the machine learning model
         prediction = predictDisease(symptoms)
         # Render a template with the prediction results

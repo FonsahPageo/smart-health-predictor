@@ -35,11 +35,11 @@
             <div class="footer-section links">
                 <h2>Quick Links</h2>
                 <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="templates/predictor.html">Predictor</a></li>
-                    <li><a href="consult.html">Consultation</a></li>
-                    <li><a href="news.html">Newsletter</a></li>
-                    <li><a href="patient.html">Account</a></li>
+                    <li><a href="{{ url_for('index') }}"><i class="fa-solid fa-house"></i> Home</a></li>
+                    <li><a href="{{ url_for('predictor') }}"><i class="fa-solid fa-heart-circle-check"></i> Predictor</a></li>
+                    <li><a href="{{ url_for('consultation') }}"><i class="fa-sharp fa-solid fa-hospital-user"></i> Consultation</a></li>
+                    <li><a href="{{ url_for('news') }}"><i class="fa-solid fa-newspaper"></i> Newsletter</a></li>
+                    <li><a href="{{ url_for('patient') }}"><i class="fa-solid fa-user"></i> Account</a></li>
                 </ul>
             </div>
             <div class="footer-section contact-form">

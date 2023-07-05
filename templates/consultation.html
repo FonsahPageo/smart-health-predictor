@@ -5,23 +5,39 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Free Consultation</title>
-    <link rel="stylesheet" href="../styles/style.css">
-    <script src="script.js"></script>
+    <title>Consultation</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script>
     <script src="https://kit.fontawesome.com/275b79e2bf.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
-    <div w3-include-html="header.html"></div>
+    <!-- <div w3-include-html="header.html"></div> -->
+    {% include 'header.html' %}
 
     <div class="container">
         <h2>See the various doctors that are available for you</h2>
+        <div>
+            <p>If you find yourself in need of medical attention and you don't know what to do,
+                our system will be able to help anaylyze and interpret your health situation. <br>
+                But the results you obtain from here are not conclusive and can never compare to the diagnosis of
+                a doctor or physician. Therefore, you are strongly advised to visit a hospital or clinic for proper
+                checkup
+                and diagnosis with tests and examinatiions carried out to accurately determine your illness.</p>
+            <p> Also, we can help you find a doctor that will respond to you and give you instant medical advice
+                and directives on what to do next or where to go.</p>
+            <p>We bring you daily tips that can improve your health and inform you of the latest happenings in the world
+                of
+                medicine so stay tuned to our news section and always stay updated.
+            </p>
+        </div>
     </div>
 
-    <div w3-include-html="footer.html"></div>
+    {% include 'footer.html' %}
+    <!-- <div w3-include-html="footer.html"></div>
     <script>
         includeHTML();
-    </script>
+    </script> -->
 </body>
 
 </html>
