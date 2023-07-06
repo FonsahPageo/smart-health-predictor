@@ -1,6 +1,6 @@
 # Import the necessary libraries
 from statistics import mode
-from flask import Flask, request, render_template
+from flask import Flask, render_template, request, redirect, url_for, session
 import numpy as np
 import pandas as pd 
 import os 
@@ -17,7 +17,7 @@ from sklearn.model_selection import train_test_split ,cross_val_score
 from sklearn.metrics import classification_report, accuracy_score, confusion_matrix
 import matplotlib.pyplot as plt
 import seaborn as sns
-from flask import Flask, render_template, request, redirect, url_for
+
 from flask_sqlalchemy import SQLAlchemy
 import mysql.connector
 
@@ -139,10 +139,6 @@ app = Flask(__name__)
 # def registration():
 #     return render_template('patient-registration.html')
 
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    return render_template('login.html')
-
 @app.route('/index')
 def index():
     return render_template('index.html')
@@ -184,7 +180,7 @@ db = mysql.connector.connect(
 )
     
 @app.route('/', methods=['GET', 'POST'])
-def register():
+def registration():
     if request.method == 'POST':
         firstname = request.form['fname']
         lastname = request.form['lname']
@@ -200,12 +196,24 @@ def register():
         values = (firstname,lastname,email,username,countrycode,phonenumber,gender,password)
         cursor.execute(query, values)
         db.commit()
-        return redirect(url_for('success'))
     return render_template('patient-registration.html')
 
-@app.route('/success')
-def success():
-    return "Registration successful!"
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        cursor = db.cursor()
+        query = "SELECT * FROM patients WHERE username = %s AND password = %s"
+        values = (username, password)
+        cursor.execute(query, values)
+        user = cursor.fetchone()
+        if user:
+            session['username'] = username
+            return redirect(url_for('index'))
+        else:
+            return render_template('login.html', error='Invalid username or password')
+    return render_template('login.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

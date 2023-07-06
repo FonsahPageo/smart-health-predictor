@@ -14,7 +14,7 @@
 <body>
     <div class="container">
         <!-- <form name="login" action="Authentication.php" method="POST"> -->
-        <form name="login" action="" method="POST">
+        <form name="login" action="{{ url_for('login') }}" method="POST">
             <h1>Login</h1>
             <label for="username"><b>Username</b></label>
             <input type="text" placeholder="Enter Username" name="username" minlength="5" required>
