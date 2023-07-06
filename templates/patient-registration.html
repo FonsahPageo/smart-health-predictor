@@ -6,15 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign up</title>
-    <link rel="stylesheet" href="../styles/style.css">
-    <link rel="stylesheet" href="styles/registration.css">
-    <script src="script.js"></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='registration.css') }}">
     <script src="https://kit.fontawesome.com/275b79e2bf.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
     <div class="container">
-        <form method="POST" action="registration.php" id="registration-form">
+        <form method="POST" action="{{ url_for('registration') }}" id="registration-form">
             <h1>Sign Up Here For Free</h1>
             <label for="fname"><b>First Name</b></label>
             <input type="text" placeholder="Enter First Name" name="fname" required>
@@ -306,6 +305,7 @@
 
         </form>
     </div>
+    
 </body>
 
 </html>
