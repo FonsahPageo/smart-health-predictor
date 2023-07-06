@@ -141,7 +141,10 @@ app = Flask(__name__)
 
 @app.route('/index')
 def index():
-    return render_template('index.html')
+    if 'username' in session:
+        return render_template('index.html')
+    else:
+        return redirect(url_for('login'))
 
 @app.route('/consultation')
 def consultation():
@@ -172,6 +175,7 @@ def predict():
     else:
         return render_template('predictor.html')
 
+app.secret_key = 'ash_key'
 db = mysql.connector.connect(
     host='localhost',
     user='root',
@@ -196,6 +200,7 @@ def registration():
         values = (firstname,lastname,email,username,countrycode,phonenumber,gender,password)
         cursor.execute(query, values)
         db.commit()
+        return redirect(url_for('login'))
     return render_template('patient-registration.html')
 
 @app.route('/login', methods=['GET', 'POST'])
