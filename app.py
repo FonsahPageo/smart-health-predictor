@@ -220,5 +220,14 @@ def login():
             return render_template('login.html', error='Invalid username or password')
     return render_template('login.html')
 
+@app.route('/profile/<string:username>')
+def profile(user_id):
+    cursor = db.cursor()
+    query = "SELECT * FROM users WHERE username = %s"
+    values = (user_id,)
+    cursor.execute(query, values)
+    user = cursor.fetchone()
+    return render_template('patient.html', user=user)
+
 if __name__ == '__main__':
     app.run(debug=True)
