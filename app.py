@@ -40,8 +40,8 @@ models = {
     "Gaussian NB": GaussianNB(),
     "Random Forest": RandomForestClassifier(random_state=18)
 }
-# producing cross validation score for models
 
+# producing cross validation score for models
 for model_name in models:
     model =models[model_name]
     scores = cross_val_score(model,X,y,cv=10,n_jobs = -1,scoring = cv_scoring)
@@ -59,6 +59,7 @@ rf_model.fit(X_train, y_train)
 preds = rf_model.predict(X_test)
 
 from statistics import mode
+
 # Training the models on whole data
 final_svm_model = SVC()
 final_nb_model = GaussianNB()
@@ -89,6 +90,7 @@ models = {
 }
 
 symptoms = X.columns.values
+
 # Creating a symptom index dictionary to encode the
 # input symptoms into numerical form
 symptom_index = {}
@@ -133,47 +135,8 @@ def predictDisease(symptoms):
     }
     return predictions
 
+# start flask application
 app = Flask(__name__)
-
-# @app.route('/', methods=['GET', 'POST'])
-# def registration():
-#     return render_template('patient-registration.html')
-
-@app.route('/index')
-def index():
-    if 'username' in session:
-        return render_template('index.html')
-    else:
-        return redirect(url_for('login'))
-
-@app.route('/consultation')
-def consultation():
-    return render_template('consultation.html')
-
-@app.route('/news')
-def news():
-    return render_template('news.html')
-
-@app.route('/patient')
-def patient():
-    return render_template('patient.html')
-
-@app.route('/predictor')
-def predictor():
-    return render_template('predictor.html')
-
-@app.route('/predict', methods=['GET', 'POST'])
-def predict():
-    if request.method == 'POST':
-        # Get the input data from the form
-        symptom_list = request.form.getlist('symptoms')
-        symptoms = ', '.join(symptom_list)
-        # Make a prediction using the machine learning model
-        prediction = predictDisease(symptoms)
-        # Render a template with the prediction results
-        return render_template('result.html', prediction=prediction)
-    else:
-        return render_template('predictor.html')
 
 app.secret_key = 'ash_key'
 db = mysql.connector.connect(
@@ -182,7 +145,8 @@ db = mysql.connector.connect(
     password='',
     database='medical'
 )
-    
+
+# defining the different routes of the website    
 @app.route('/', methods=['GET', 'POST'])
 def registration():
     if request.method == 'POST':
@@ -219,6 +183,43 @@ def login():
         else:
             return render_template('login.html', error='Invalid username or password')
     return render_template('login.html')
+
+@app.route('/index')
+def index():
+    # require user to be logged in before accessing the platform
+    if 'username' in session:
+        return render_template('index.html')
+    else:
+        return redirect(url_for('login'))
+
+@app.route('/consultation')
+def consultation():
+    return render_template('consultation.html')
+
+@app.route('/news')
+def news():
+    return render_template('news.html')
+
+@app.route('/patient')
+def patient():
+    return render_template('patient.html')
+
+@app.route('/predictor')
+def predictor():
+    return render_template('predictor.html')
+
+@app.route('/predict', methods=['GET', 'POST'])
+def predict():
+    if request.method == 'POST':
+        # Get the input data from the form
+        symptom_list = request.form.getlist('symptoms')
+        symptoms = ', '.join(symptom_list)
+        # Make a prediction using the machine learning model
+        prediction = predictDisease(symptoms)
+        # Render a template with the prediction results
+        return render_template('result.html', prediction=prediction)
+    else:
+        return render_template('predictor.html')
 
 @app.route('/profile/<string:username>')
 def profile(user_id):
