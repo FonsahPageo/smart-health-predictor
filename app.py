@@ -230,5 +230,12 @@ def profile(user_id):
     user = cursor.fetchone()
     return render_template('patient.html', user=user)
 
+@app.route('/logout')
+def logout():
+    # Perform logout actions
+    session.clear()  # Clear session data
+    # Additional logout tasks
+    return render_template('patient-registration.html')  # Redirect to registration page
+
 if __name__ == '__main__':
     app.run(debug=True)
