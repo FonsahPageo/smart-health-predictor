@@ -22,6 +22,11 @@ form {
     width: 100%;
 }
 
+.auth{
+    display: flex;
+    gap: 10px;
+}
+
 label {
     display: block;
     margin-bottom: 8px;
