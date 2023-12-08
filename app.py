@@ -150,6 +150,9 @@ db = mysql.connector.connect(
 @app.route('/', methods=['GET', 'POST'])
 def registration():
     if request.method == 'POST':
+        if 'login' in request.form:
+            return redirect(url_for('login'))
+        
         firstname = request.form['fname']
         lastname = request.form['lname']
         email = request.form['email']
@@ -160,11 +163,12 @@ def registration():
         password = request.form['password']
         
         cursor = db.cursor()
-        query = "INSERT INTO patients (Firstname,Lastname,Email,Username,CountryCode,PhoneNumber,Gender,Password) VALUES (%s, %s,%s, %s,%s, %s,%s, %s)"
-        values = (firstname,lastname,email,username,countrycode,phonenumber,gender,password)
+        query = "INSERT INTO patients (Firstname, Lastname, Email, Username, CountryCode, PhoneNumber, Gender, Password) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
+        values = (firstname, lastname, email, username, countrycode, phonenumber, gender, password)
         cursor.execute(query, values)
         db.commit()
         return redirect(url_for('login'))
+    
     return render_template('patient-registration.html')
 
 @app.route('/login', methods=['GET', 'POST'])
