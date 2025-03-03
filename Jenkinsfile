@@ -43,6 +43,7 @@ pipeline {
                 sh '''
                   rm -rf smart-health-deploy
                   git clone https://github.com/FonsahPageo/smart-health-deploy.git
+                  rm -rf smart-health-predictor/.git
                   cp -R smart-health-predictor smart-health-deploy
                   cd smart-health-deploy
                   git add .
