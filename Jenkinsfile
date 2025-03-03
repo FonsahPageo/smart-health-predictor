@@ -20,9 +20,11 @@ pipeline {
                 sh 'rm -rf smart-health-predictor'
                 echo 'Cloning frontend GitHub for testing...'
                 sh 'git clone https://github.com/FonsahPageo/smart-health-predictor.git'
+
+                sh 'cd smart-health-predictor'
                 
                 echo 'Building Docker images for testing...'
-                sh 'docker build -t ashprince/predictor-test:latest smart-health-predictor'
+                sh 'docker build -t ashprince/predictor-test:latest -f Dockerfile .'
                 
                 echo 'Deploying test environment with Docker Compose...'
                 sh 'docker-compose -f docker-compose.test.yaml up -d'
