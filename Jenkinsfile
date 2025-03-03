@@ -22,6 +22,8 @@ pipeline {
                 sh 'git clone https://github.com/FonsahPageo/smart-health-predictor.git'
 
                 sh 'cd smart-health-predictor'
+
+                sh 'pip install --upgrade'
                 
                 echo 'Building Docker images for testing...'
                 sh 'docker build -t ashprince/predictor-test:latest -f Dockerfile .'
