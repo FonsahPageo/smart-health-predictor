@@ -9,4 +9,3 @@ pickle-mixin
 mysql-connector-python
 matplotlib
 seaborn
-warnings
