@@ -1,0 +1,12 @@
+flask
+flask_sqlalchemy
+numpy
+pandas
+scipy
+scikit-learn
+joblib
+pickle-mixin
+mysql-connector-python
+matplotlib
+seaborn
+warnings
