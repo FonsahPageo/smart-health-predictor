@@ -17,6 +17,7 @@ pipeline {
         stage('Testing Environment - Build & Test') {
             agent { label 'built-in' }
             steps {
+                sh 'rm -rf smart-health-predictor'
                 echo 'Cloning frontend GitHub for testing...'
                 sh 'git clone https://github.com/FonsahPageo/smart-health-predictor.git'
                 
