@@ -27,7 +27,7 @@ pipeline {
                 sh 'docker build -t ashprince/predictor-test:latest -f Dockerfile .'
                 
                 echo 'Deploying test environment with Docker Compose...'
-                sh 'docker-compose -f docker-compose.test.yaml up -d'
+                sh 'docker-compose -f docker-compose.yaml up -d'
             }
         }
         stage('Manual Approval') {
