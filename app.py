@@ -140,7 +140,7 @@ app = Flask(__name__)
 
 app.secret_key = 'ash_key'
 db = mysql.connector.connect(
-    host='localhost',
+    host='mysql',
     user='root',
     password='',
     database='medical'
