@@ -23,10 +23,24 @@ pipeline {
 
                 sh 'cd smart-health-predictor'
 
-                sh 'docker stop $(docker ps -aq)'
-                sh 'docker rm $(docker ps -aq)'
-                sh 'docker rmi $(docker images -q)'
-                sh 'docker system prune -a --volumes'
+                sh '''
+                        if [ "$(docker ps -aq)" ]; then
+                            docker stop $(docker ps -aq)
+                        fi
+                    '''
+                sh '''
+                        if [ "$(docker ps -aq)" ]; then
+                            docker rm $(docker ps -aq)
+                        fi
+                    '''
+                sh '''
+                        if [ "$(docker images -q)" ]; then
+                            docker rmi $(docker images -q)
+                        fi
+                    '''
+                sh '''
+                        docker system prune -a --volumes -f
+                    '''
                 
                 echo 'Building Docker images for testing...'
                 sh 'docker build -t ashprince/predictor-test:latest -f Dockerfile .'
