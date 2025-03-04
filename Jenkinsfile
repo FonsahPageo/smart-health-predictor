@@ -22,6 +22,11 @@ pipeline {
                 sh 'git clone https://github.com/FonsahPageo/smart-health-predictor.git'
 
                 sh 'cd smart-health-predictor'
+
+                sh 'docker stop $(docker ps -aq)'
+                sh 'docker rm $(docker ps -aq)'
+                sh 'docker rmi $(docker images -q)'
+                sh 'docker system prune -a --volumes'
                 
                 echo 'Building Docker images for testing...'
                 sh 'docker build -t ashprince/predictor-test:latest -f Dockerfile .'
