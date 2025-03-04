@@ -18,7 +18,7 @@ pipeline {
             agent { label 'built-in' }
             steps {
                 sh 'rm -rf smart-health-predictor'
-                echo 'Cloning frontend GitHub for testing...'
+                echo 'Cloning GitHub for testing...'
                 sh 'git clone https://github.com/FonsahPageo/smart-health-predictor.git'
 
                 sh 'cd smart-health-predictor'
