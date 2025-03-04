@@ -142,7 +142,7 @@ app.secret_key = 'ash_key'
 db = mysql.connector.connect(
     host='mysql',
     user='root',
-    password='',
+    password='rootpassword',
     database='medical'
 )
 
