@@ -1,5 +1,5 @@
 <?php
-$host="localhost";
+$host="mysql";
 $username="root";
 $password="";
 $db_name="medical";
