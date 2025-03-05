@@ -6,6 +6,13 @@ pipeline {
         PROD_IMAGE = '${DOCKERHUB_ACCOUNT}/predictor-prod:latest'
     }
     stages {
+        stage('Verify Docker') {
+            steps {
+                sh 'whoami'
+                sh 'which docker'
+                sh 'docker --version'
+            }
+        }
         stage('Docker Login') {
             agent { label 'test' }
             steps {
