@@ -6,15 +6,15 @@ pipeline {
         PROD_IMAGE = '${DOCKERHUB_ACCOUNT}/predictor-prod:latest'
     }
     stages {
-        stage('Verify Docker') {
-            agent { label 'built-in'}
-            steps {
-                sh 'whoami'
-                sh 'sudo systemctl start docker'
-                sh 'which docker'
-                sh 'docker --version'
-            }
-        }
+        // stage('Verify Docker') {
+        //     agent { label 'built-in'}
+        //     steps {
+        //         sh 'whoami'
+        //         sh 'sudo systemctl start docker'
+        //         sh 'which docker'
+        //         sh 'docker --version'
+        //     }
+        // }
         stage('Docker Login') {
             agent { label 'built-in' }
             steps {
