@@ -56,16 +56,17 @@ pipeline {
             agent { label 'built-in' }
             steps {
                 echo 'Copying code to deploy repository and building staging images...'
-                sh '''
-                  rm -rf smart-health-deploy
-                  git clone https://github.com/FonsahPageo/smart-health-deploy.git
-                  rm -rf smart-health-predictor/.git
-                  cp -R smart-health-predictor smart-health-deploy
-                  cd smart-health-deploy
-                  git add .
-                  git commit -m "Staging deployment update"
-                  git push origin master
-                '''
+                withCredentials([usernamePassword(credentialsId: 'github', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PASS')]) {
+                    sh '''
+                    git clone https://$GIT_USER:$GIT_PASS@github.com/FonsahPageo/smart-health-deploy.git
+                    cd smart-health-deploy
+                    git config user.email "ashprincepageo@gmail.com"
+                    git config user.name "FonsahPageo
+                    git add .
+                    git commit -m "Staging deployment update"
+                    git push origin master
+                    '''
+                }
                 sh 'docker build -t ${STAGE_IMAGE} smart-health-deploy'
                 
                 echo 'Pushing staging images to DockerHub...'
