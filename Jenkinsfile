@@ -2,19 +2,10 @@ pipeline {
     agent none
     environment {
         DOCKERHUB_ACCOUNT = 'ashprince'
-        STAGE_IMAGE = "${DOCKERHUB_ACCOUNT}/predictor-stage:latest"
-        PROD_IMAGE = "${DOCKERHUB_ACCOUNT}/predictor-prod:latest"
+        STAGE_IMAGE = '${DOCKERHUB_ACCOUNT}/predictor-stage:latest'
+        PROD_IMAGE = '${DOCKERHUB_ACCOUNT}/predictor-prod:latest'
     }
     stages {
-        stage('Verify Docker') {
-            agent { label 'built-in' }
-            steps {
-                sh 'whoami'
-                sh 'sudo systemctl start docker'
-                sh 'which docker'
-                sh 'docker --version'
-            }
-        }
         stage('Docker Login') {
             agent { label 'built-in' }
             steps {
@@ -29,23 +20,24 @@ pipeline {
                 sh 'rm -rf smart-health-predictor'
                 echo 'Cloning GitHub for testing...'
                 sh 'git clone https://github.com/FonsahPageo/smart-health-predictor.git'
+
                 sh 'cd smart-health-predictor'
 
                 sh '''
-                    if [ "$(docker ps -aq)" ]; then
-                        docker stop $(docker ps -aq)
-                    fi
-                '''
+                        if [ "$(docker ps -aq)" ]; then
+                            docker stop $(docker ps -aq)
+                        fi
+                    '''
                 sh '''
-                    if [ "$(docker ps -aq)" ]; then
-                        docker rm $(docker ps -aq)
-                    fi
-                '''
+                        if [ "$(docker ps -aq)" ]; then
+                            docker rm $(docker ps -aq)
+                        fi
+                    '''
                 sh '''
-                    if [ "$(docker images -q)" ]; then
-                        docker rmi $(docker images -q)
-                    fi
-                '''
+                        if [ "$(docker images -q)" ]; then
+                            docker rmi $(docker images -q)
+                        fi
+                    '''
                 sh 'docker system prune -a --volumes -f'           
                 echo 'Building Docker images for testing...'
                 sh 'docker build -t ashprince/predictor-test:latest -f Dockerfile .'
@@ -84,12 +76,38 @@ pipeline {
                 sh 'docker push ${STAGE_IMAGE}'
             }
         }
-        stage('Staging') {
-            agent { label 'stage' }
-            steps {
+        stage('Staging'){
+            agent { label 'stage'}
+            steps{
                 echo 'Deploying staging containers using Kubernetes...'
                 sh 'kubectl apply -f kubernetes/staging-deployment.yaml'
             }
         }
+        // stage('Production Build') {
+        //     agent { label 'prod' }
+        //     steps {
+        //         echo "Pushing code to stakeholder's repository and building production images..."
+        //         sh '''
+        //           cd Motinatech-Deploy
+        //           git remote add stakeholder https://github.com/stakeholder/repository.git || true
+        //           git push stakeholder master
+        //         '''
+        //         sh 'docker build -t ${FRONTEND_IMAGE_PROD} Motinatech-Deploy/frontend'
+        //         // sh 'docker build -t ${BACKEND_IMAGE_PROD} Motinatech-Deploy/backend'
+                
+        //         echo 'Pushing production images to DockerHub...'
+        //         sh 'docker push ${FRONTEND_IMAGE_PROD}'
+        //         // sh 'docker push ${BACKEND_IMAGE_PROD}'
+        //     }
+        // }
+        // stage('Production Deployment') {
+        //     agent { label 'prod' }
+        //     steps {
+        //         echo 'Pulling production images and deploying production containers...'
+        //         sh 'docker pull ${FRONTEND_IMAGE_PROD}'
+        //         sh 'docker pull ${BACKEND_IMAGE_PROD}'
+        //         sh 'docker-compose -f docker-compose.prod.yml up -d'
+        //     }
+        // }
     }
 }
