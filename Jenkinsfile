@@ -38,7 +38,8 @@ pipeline {
                             docker rmi $(docker images -q)
                         fi
                     '''
-                sh 'docker system prune -a --volumes -f'           
+                // sh 'docker system prune -a --volumes -f'
+
                 echo 'Building Docker images for testing...'
                 sh 'docker build -t ashprince/predictor-test:latest -f Dockerfile .'
                 
