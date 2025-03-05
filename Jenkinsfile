@@ -15,7 +15,7 @@ pipeline {
             }
         }
         stage('Testing Environment - Build & Test') {
-            agent { label 'built-in' }
+            agent { label 'test' }
             steps {
                 sh 'rm -rf smart-health-predictor'
                 echo 'Cloning GitHub for testing...'
@@ -47,13 +47,13 @@ pipeline {
             }
         }
         stage('Manual Approval') {
-            agent { label 'built-in' }
+            agent { label 'test' }
             steps {
                 input message: 'Approve deployment to staging server?', ok: 'Proceed'
             }
         }
         stage('Staging Deployment') {
-            agent { label 'built-in' }
+            agent { label 'stage' }
             steps {
                 echo 'Copying code to deploy repository and building staging images...'
                 withCredentials([usernamePassword(credentialsId: 'github', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PASS')]) {
