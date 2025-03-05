@@ -60,6 +60,8 @@ pipeline {
                     sh '''
                     rm -rf smart-health-deploy
                     git clone https://$GIT_USER:$GIT_PASS@github.com/FonsahPageo/smart-health-deploy.git
+                    rm -rf smart-health-predictor/.git
+                    cp -R smart-health-predictor/* smart-health-deploy/
                     cd smart-health-deploy
                     git config user.email "ashprincepageo@gmail.com"
                     git config user.name "FonsahPageo"
@@ -82,7 +84,7 @@ pipeline {
             }
         }
         // stage('Production Build') {
-        //     agent { label 'server-prod' }
+        //     agent { label 'prod' }
         //     steps {
         //         echo "Pushing code to stakeholder's repository and building production images..."
         //         sh '''
@@ -99,7 +101,7 @@ pipeline {
         //     }
         // }
         // stage('Production Deployment') {
-        //     agent { label 'server-prod' }
+        //     agent { label 'prod' }
         //     steps {
         //         echo 'Pulling production images and deploying production containers...'
         //         sh 'docker pull ${FRONTEND_IMAGE_PROD}'
