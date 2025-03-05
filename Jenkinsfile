@@ -1,5 +1,5 @@
 pipeline {
-    agent none
+    // agent none
     environment {
         DOCKERHUB_ACCOUNT = 'ashprince'
         STAGE_IMAGE = '${DOCKERHUB_ACCOUNT}/predictor-stage:latest'
