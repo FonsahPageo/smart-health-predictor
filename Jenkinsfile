@@ -62,7 +62,7 @@ pipeline {
                     git clone https://$GIT_USER:$GIT_PASS@github.com/FonsahPageo/smart-health-deploy.git
                     cd smart-health-deploy
                     git config user.email "ashprincepageo@gmail.com"
-                    git config user.name "FonsahPageo
+                    git config user.name "FonsahPageo"
                     git add .
                     git commit -m "Staging deployment update"
                     git push origin master
