@@ -10,6 +10,7 @@ pipeline {
             agent { label 'built-in'}
             steps {
                 sh 'whoami'
+                sh 'sudo systemctl start docker'
                 sh 'which docker'
                 sh 'docker --version'
             }
