@@ -63,7 +63,6 @@ pipeline {
                   cp -R smart-health-predictor smart-health-deploy
                   cd smart-health-deploy
                   git add .
-                  git credentials Id: 'GitHub', url: 'https://github.com/FonsahPageo/smart-health-deploy.git'
                   git commit -m "Staging deployment update"
                   git push origin master
                 '''
