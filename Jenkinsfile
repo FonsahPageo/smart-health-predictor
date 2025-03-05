@@ -58,6 +58,7 @@ pipeline {
                 echo 'Copying code to deploy repository and building staging images...'
                 withCredentials([usernamePassword(credentialsId: 'github', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PASS')]) {
                     sh '''
+                    rm -rf smart-health-deploy
                     git clone https://$GIT_USER:$GIT_PASS@github.com/FonsahPageo/smart-health-deploy.git
                     cd smart-health-deploy
                     git config user.email "ashprincepageo@gmail.com"
