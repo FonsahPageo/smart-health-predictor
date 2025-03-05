@@ -7,6 +7,7 @@ pipeline {
     }
     stages {
         stage('Verify Docker') {
+            agent { label 'built-in'}
             steps {
                 sh 'whoami'
                 sh 'which docker'
@@ -14,7 +15,7 @@ pipeline {
             }
         }
         stage('Docker Login') {
-            agent { label 'test' }
+            agent { label 'built-in' }
             steps {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASSWORD')]) {
                     sh 'echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USER" --password-stdin'
