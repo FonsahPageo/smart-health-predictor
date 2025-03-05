@@ -38,9 +38,12 @@ pipeline {
                             docker rmi $(docker images -q)
                         fi
                     '''
-                sh '''
+                sh  '''
                         docker system prune -a --volumes -f
                     '''
+
+                sh 'sudo rm -rf /var/lib/jenkins/workspace/*'
+                sh 'sudo rm -rf /var/log/jenkins/*'
                 
                 echo 'Building Docker images for testing...'
                 sh 'docker build -t ashprince/predictor-test:latest -f Dockerfile .'
