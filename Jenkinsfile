@@ -29,24 +29,23 @@ pipeline {
                 sh 'rm -rf smart-health-predictor'
                 echo 'Cloning GitHub for testing...'
                 sh 'git clone https://github.com/FonsahPageo/smart-health-predictor.git'
-
                 sh 'cd smart-health-predictor'
 
                 sh '''
-                        if [ "$(docker ps -aq)" ]; then
-                            docker stop $(docker ps -aq)
-                        fi
-                    '''
+                    if [ "$(docker ps -aq)" ]; then
+                        docker stop $(docker ps -aq)
+                    fi
+                '''
                 sh '''
-                        if [ "$(docker ps -aq)" ]; then
-                            docker rm $(docker ps -aq)
-                        fi
-                    '''
+                    if [ "$(docker ps -aq)" ]; then
+                        docker rm $(docker ps -aq)
+                    fi
+                '''
                 sh '''
-                        if [ "$(docker images -q)" ]; then
-                            docker rmi $(docker images -q)
-                        fi
-                    '''
+                    if [ "$(docker images -q)" ]; then
+                        docker rmi $(docker images -q)
+                    fi
+                '''
                 sh 'docker system prune -a --volumes -f'           
                 echo 'Building Docker images for testing...'
                 sh 'docker build -t ashprince/predictor-test:latest -f Dockerfile .'
@@ -79,10 +78,10 @@ pipeline {
                     git push origin master
                     '''
                 }
-                sh "docker build -t ${STAGE_IMAGE} smart-health-deploy"
+                sh 'docker build -t ${STAGE_IMAGE} smart-health-deploy'
                 
                 echo 'Pushing staging images to DockerHub...'
-                sh "docker push ${STAGE_IMAGE}"
+                sh 'docker push ${STAGE_IMAGE}'
             }
         }
         stage('Staging') {
