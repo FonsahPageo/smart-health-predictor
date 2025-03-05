@@ -14,6 +14,13 @@ pipeline {
                 }
             }
         }
+        stage ('Check for docker on agent'){
+            agent { label 'test'}
+            steps{
+                sh 'echo docker --version'
+                sh 'echo which docker'
+            }
+        }
         stage('Testing Environment - Build & Test') {
             agent { label 'test' }
             steps {
