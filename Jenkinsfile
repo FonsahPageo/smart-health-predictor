@@ -17,8 +17,8 @@ pipeline {
         stage ('Check for docker on agent'){
             agent { label 'test'}
             steps{
-                sh 'echo docker --version'
-                sh 'echo which docker'
+                sh 'docker --version'
+                sh 'which docker'
             }
         }
         stage('Testing Environment - Build & Test') {
