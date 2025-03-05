@@ -7,7 +7,7 @@ pipeline {
     }
     stages {
         stage('Docker Login') {
-            agent { label 'built-in' }
+            agent { label 'test' }
             steps {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASSWORD')]) {
                     sh 'echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USER" --password-stdin'
