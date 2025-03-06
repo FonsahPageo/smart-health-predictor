@@ -35,6 +35,7 @@ pipeline {
                         git clone https://github.com/FonsahPageo/smart-health-deploy.git
                         rm -rf smart-health-predictor/.git
                         cp -R smart-health-predictor/* smart-health-deploy/
+                        rm -rf smart-health-predictor
                         cd smart-health-deploy
                         git config user.email "ashprincepageo@gmail.com"
                         git config user.name "FonsahPageo"
@@ -60,7 +61,7 @@ pipeline {
                     '''
                 }
             
-            // just to make a change on repo
+            // just to make a change on repository
         stage('Production deployment') {
             agent { label 'prod' }
             steps {
