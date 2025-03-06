@@ -7,7 +7,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: rootpassword
       MYSQL_DATABASE: medical
-      MYSQL_USER: user
+      MYSQL_USER: root
       MYSQL_PASSWORD: userpassword
     ports:
       - "3306:3306"
@@ -29,7 +29,7 @@ services:
       - FLASK_ENV=development
       - PORT=5000
       - DB_HOST=mysql
-      - DB_USER=user
+      - DB_USER=root
       - DB_PASSWORD=rootpassword
       - DB_NAME=medical
 

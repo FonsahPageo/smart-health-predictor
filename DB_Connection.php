@@ -1,7 +1,7 @@
 <?php
 $host="mysql";
 $username="root";
-$password="";
+$password="rootpassword";
 $db_name="medical";
 $con= mysqli_connect($host,$username,$password,$db_name);
 if(!$con){
