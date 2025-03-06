@@ -11,7 +11,7 @@ pipeline {
             steps {
                 sh '''
                     rm -rf smart-health-predictor
-                    git clone https://github.com/FonsahPageo/smart-health-predictor.git
+                    git clone --branch deployment https://github.com/FonsahPageo/smart-health-predictor.git
 
                     docker stop $(docker ps -aq) 2>/dev/null || true
                     docker rm $(docker ps -aq) 2>/dev/null || true
@@ -33,7 +33,7 @@ pipeline {
                     sh '''
                         ls -al
                         rm -rf smart-health-deploy
-                        git clone https://github.com/FonsahPageo/smart-health-deploy.git
+                        git clone --branch main https://github.com/FonsahPageo/smart-health-deploy.git
                         rm -rf smart-health-predictor/.git
                         cp -R smart-health-predictor/* smart-health-deploy/
                         cd smart-health-deploy
@@ -51,7 +51,7 @@ pipeline {
             steps{
                 withCredentials([string(credentialsId: 'github-token', variable: 'GITHUB_TOKEN')]) {
                     sh '''
-                        git clone https://FonsahPageo:$GITHUB_TOKEN@github.com/FonsahPageo/smart-health-deploy.git
+                        git clone --branch main https://FonsahPageo:$GITHUB_TOKEN@github.com/FonsahPageo/smart-health-deploy.git
                         cd smart-health-deploy
                         docker build -t ${STAGE_IMAGE} .
                         docker push ${STAGE_IMAGE}
@@ -67,7 +67,7 @@ pipeline {
                 withCredentials([string(credentialsId: 'github-token', variable: 'GITHUB_TOKEN')]) {
                     sh '''
                         rm -rf smart-health-deploy
-                        git clone https://FonsahPageo:$GITHUB_TOKEN@github.com/FonsahPageo/smart-health-deploy.git
+                        git clone --branch main https://FonsahPageo:$GITHUB_TOKEN@github.com/FonsahPageo/smart-health-deploy.git
                         cd smart-health-deploy
                         docker build -t ${PROD_IMAGE} .
                         docker push ${PROD_IMAGE}
