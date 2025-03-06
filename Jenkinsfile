@@ -16,7 +16,6 @@ pipeline {
                     docker stop $(docker ps -aq) 2>/dev/null || true
                     docker rm $(docker ps -aq) 2>/dev/null || true
                     docker rmi $(docker images -q) 2>/dev/null || true
-
                     docker system prune -a --volumes -f
 
                     // docker build -t ashprince/predictor:latest -f Dockerfile .
