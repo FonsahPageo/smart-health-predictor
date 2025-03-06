@@ -6,21 +6,14 @@ pipeline {
         PROD_IMAGE = '${DOCKERHUB_ACCOUNT}/predictor-prod:latest'
     }
     stages {
-        stage('Docker Login') {
-            agent { label 'built-in' }
-            steps {
-                withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASSWORD')]) {
-                    sh 'echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USER" --password-stdin'
-                }
-            }
-        }
-        stage ('Check for docker on agent'){
-            agent { label 'test'}
-            steps{
-                sh 'docker --version'
-                sh 'which docker'
-            }
-        }
+        // stage('Docker Login') {
+        //     agent { label 'built-in' }
+        //     steps {
+        //         withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASSWORD')]) {
+        //             sh 'echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USER" --password-stdin'
+        //         }
+        //     }
+        // }
         stage('Testing Environment - Build & Test') {
             agent { label 'test' }
             steps {
