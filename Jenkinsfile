@@ -13,17 +13,9 @@ pipeline {
                     rm -rf smart-health-predictor
                     git clone https://github.com/FonsahPageo/smart-health-predictor.git
 
-                    if [ "$(docker ps -aq)" ]; then
-                        docker stop $(docker ps -aq)
-                    fi
-
-                    if [ "$(docker ps -aq)" ]; then
-                        docker rm $(docker ps -aq)
-                    fi
-
-                    if [ "$(docker images -q)" ]; then
-                        docker rmi $(docker images -q)
-                    fi
+                    docker stop $(docker ps -aq) 2>/dev/null || true
+                    docker rm $(docker ps -aq) 2>/dev/null || true
+                    docker rmi $(docker images -q) 2>/dev/null || true
 
                     docker system prune -a --volumes -f
 
@@ -41,7 +33,7 @@ pipeline {
         stage('Copy code to staging server') {
             agent { label 'test' }
             steps {
-                withCredentials([string(credentialsId: 'github-token', variable: 'GITHUB_TOKEN')]) {
+                withCredentials([string(credentialsId: 'github_token', variable: 'GITHUB_TOKEN')]) {
                     sh '''
                         ls -al
                         rm -rf smart-health-deploy
