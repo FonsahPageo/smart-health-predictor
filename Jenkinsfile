@@ -60,7 +60,7 @@ pipeline {
             }
         }
         stage('Staging Deployment') {
-            agent { label 'stage' }
+            agent { label 'test' }
             steps {
                 echo 'Copying code to deploy repository and building staging images...'
                 withCredentials([usernamePassword(credentialsId: 'github', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PASS')]) {
@@ -77,15 +77,15 @@ pipeline {
                     git push origin master
                     '''
                 }
-                sh 'docker build -t ${STAGE_IMAGE} smart-health-deploy'
-                
-                echo 'Pushing staging images to DockerHub...'
-                sh 'docker push ${STAGE_IMAGE}'
             }
         }
         stage('Staging'){
             agent { label 'stage'}
             steps{
+                sh 'git clone https://$GIT_USER:$GIT_PASS@github.com/FonsahPageo/smart-health-deploy.git'
+                sh 'docker build -t ${STAGE_IMAGE} smart-health-deploy'
+                echo 'Pushing staging images to DockerHub...'
+                sh 'docker push ${STAGE_IMAGE}'
                 echo 'Deploying staging containers using Kubernetes...'
                 sh 'kubectl apply -f kubernetes/staging-deployment.yaml'
             }
