@@ -31,9 +31,8 @@ pipeline {
             steps {
                 withCredentials([string(credentialsId: 'github_token', variable: 'GITHUB_TOKEN')]) {
                     sh '''
-                        ls -al
                         rm -rf smart-health-deploy
-                        git clone --branch main https://github.com/FonsahPageo/smart-health-deploy.git
+                        git clone https://github.com/FonsahPageo/smart-health-deploy.git
                         rm -rf smart-health-predictor/.git
                         cp -R smart-health-predictor/* smart-health-deploy/
                         cd smart-health-deploy
@@ -51,7 +50,7 @@ pipeline {
             steps{
                 withCredentials([string(credentialsId: 'github-token', variable: 'GITHUB_TOKEN')]) {
                     sh '''
-                        git clone --branch main https://FonsahPageo:$GITHUB_TOKEN@github.com/FonsahPageo/smart-health-deploy.git
+                        git clone https://FonsahPageo:$GITHUB_TOKEN@github.com/FonsahPageo/smart-health-deploy.git
                         cd smart-health-deploy
                         docker build -t ${STAGE_IMAGE} .
                         docker push ${STAGE_IMAGE}
