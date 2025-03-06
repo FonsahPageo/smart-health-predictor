@@ -48,9 +48,10 @@ pipeline {
         stage('Staging deployment'){
             agent { label 'stage'}
             steps{
-                withCredentials([string(credentialsId: 'github-token', variable: 'GITHUB_TOKEN')]) {
+                withCredentials([string(credentialsId: 'github_token', variable: 'GITHUB_TOKEN')]) {
                     sh '''
-                        git clone https://FonsahPageo:$GITHUB_TOKEN@github.com/FonsahPageo/smart-health-deploy.git
+                        r -rf smart-health-deploy
+                        git clone https://github.com/FonsahPageo/smart-health-deploy.git
                         cd smart-health-deploy
                         docker build -t ${STAGE_IMAGE} .
                         docker push ${STAGE_IMAGE}
@@ -63,7 +64,7 @@ pipeline {
         stage('Production deployment') {
             agent { label 'prod' }
             steps {
-                withCredentials([string(credentialsId: 'github-token', variable: 'GITHUB_TOKEN')]) {
+                withCredentials([string(credentialsId: 'github_token', variable: 'GITHUB_TOKEN')]) {
                     sh '''
                         rm -rf smart-health-deploy
                         git clone --branch main https://FonsahPageo:$GITHUB_TOKEN@github.com/FonsahPageo/smart-health-deploy.git
