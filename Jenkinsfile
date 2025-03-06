@@ -69,10 +69,10 @@ pipeline {
                 withCredentials([string(credentialsId: 'github_token', variable: 'GITHUB_TOKEN')]) {
                     sh '''
                         rm -rf smart-health-deploy
-                        git clone --branch main https://FonsahPageo:$GITHUB_TOKEN@github.com/FonsahPageo/smart-health-deploy.git
+                        git clone --branch main https://github.com/FonsahPageo/smart-health-deploy.git
                         cd smart-health-deploy
-                        docker build -t ${PROD_IMAGE} .
-                        docker push ${PROD_IMAGE}
+                        docker build -t ashprince/predictor-prod:latest .
+                        docker push ashprince/predictor-prod:latest
                         kubectl delete all --all
                         kubectl apply -f deployment.yaml
                     '''
