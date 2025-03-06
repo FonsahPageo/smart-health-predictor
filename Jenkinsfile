@@ -54,6 +54,7 @@ pipeline {
                         rm -rf smart-health-deploy
                         git clone https://github.com/FonsahPageo/smart-health-deploy.git
                         cd smart-health-deploy
+                        docker system prune -a --volumes -f
                         docker build -t ashprince/predictor-stage:latest .
                         docker push ashprince/predictor-stage:latest
                         kubectl delete all --all
@@ -71,6 +72,7 @@ pipeline {
                         rm -rf smart-health-deploy
                         git clone --branch main https://github.com/FonsahPageo/smart-health-deploy.git
                         cd smart-health-deploy
+                        docker system prune -a --volumes -f
                         docker build -t ashprince/predictor-prod:latest .
                         docker push ashprince/predictor-prod:latest
                         kubectl delete all --all
