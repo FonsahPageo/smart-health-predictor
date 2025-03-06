@@ -74,7 +74,7 @@ pipeline {
                     git config user.name "FonsahPageo"
                     git add .
                     git commit -m "Staging deployment update"
-                    git push origin master
+                    git push origin main
                     '''
                 }
             }
