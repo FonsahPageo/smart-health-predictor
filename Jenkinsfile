@@ -74,7 +74,7 @@ pipeline {
                     git config user.name "FonsahPageo"
                     git add .
                     git commit -m "Staging deployment update"
-                    git push origin main
+                    git push https://FonsahPageo:$github_token@github.com/FonsahPageo/smart-health-deploy.git
                     '''
                 }
             }
