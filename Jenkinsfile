@@ -6,15 +6,7 @@ pipeline {
         PROD_IMAGE = '${DOCKERHUB_ACCOUNT}/predictor-prod:latest'
     }
     stages {
-        // stage('Docker Login') {
-        //     agent { label 'built-in' }
-        //     steps {
-        //         withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASSWORD')]) {
-        //             sh 'echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USER" --password-stdin'
-        //         }
-        //     }
-        // }
-        stage('Testing Environment - Build & Test') {
+        stage('Testing environent') {
             agent { label 'test' }
             steps {
                 sh 'rm -rf smart-health-predictor'
@@ -40,7 +32,7 @@ pipeline {
                     '''
                 sh 'docker system prune -a --volumes -f'
 
-                sh 'docker build -t ashprince/predictor-test:latest -f Dockerfile .'
+                sh 'docker build -t ashprince/predictor:latest -f Dockerfile .'
                 
                 echo 'Deploying test environment with Docker Compose...'
                 sh 'docker-compose -f docker-compose.yaml up -d'
@@ -58,8 +50,9 @@ pipeline {
                 echo 'Copying code to deploy repository and building staging images...'
                 withCredentials([usernamePassword(credentialsId: 'github-token', variable: 'GITHUB_TOKEN')]) {
                     sh '''
+                    echo ls -al
                     rm -rf smart-health-deploy
-                    git clone https://$GIT_USER:$GIT_PASS@github.com/FonsahPageo/smart-health-deploy.git
+                    git clone https://FonsahPageo:$GITHUB_TOKEN@github.com/FonsahPageo/smart-health-deploy.git
                     rm -rf smart-health-predictor/.git
                     cp -R smart-health-predictor/* smart-health-deploy/
                     cd smart-health-deploy
@@ -67,7 +60,7 @@ pipeline {
                     git config user.name "FonsahPageo"
                     git add .
                     git commit -m "Staging deployment update"
-                    git push https://FonsahPageo:$GITHUB-TOKEN@github.com/FonsahPageo/smart-health-deploy.git
+                    git push https://FonsahPageo:$GITHUB_TOKEN@github.com/FonsahPageo/smart-health-deploy.git
                     '''
                 }
             }

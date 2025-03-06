@@ -15,7 +15,7 @@ services:
       - mysql_data:/var/lib/mysql
 
   predictor:
-    image: ashprince/predictor-test:latest
+    image: ashprince/predictor:latest
     container_name: predictor
     depends_on:
       - mysql
