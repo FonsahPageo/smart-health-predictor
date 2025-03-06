@@ -63,7 +63,7 @@ pipeline {
             agent { label 'test' }
             steps {
                 echo 'Copying code to deploy repository and building staging images...'
-                withCredentials([usernamePassword(credentialsId: 'github', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PASS')]) {
+                withCredentials([usernamePassword(credentialsId: 'github-token', variable: 'GITHUB_TOKEN')]) {
                     sh '''
                     rm -rf smart-health-deploy
                     git clone https://$GIT_USER:$GIT_PASS@github.com/FonsahPageo/smart-health-deploy.git
@@ -74,7 +74,7 @@ pipeline {
                     git config user.name "FonsahPageo"
                     git add .
                     git commit -m "Staging deployment update"
-                    git push https://FonsahPageo:$github_token@github.com/FonsahPageo/smart-health-deploy.git
+                    git push https://FonsahPageo:$GITHUB-TOKEN@github.com/FonsahPageo/smart-health-deploy.git
                     '''
                 }
             }
