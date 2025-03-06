@@ -186,7 +186,6 @@ def registration():
         gender = request.form["gender"]
         password = request.form["password"]
 
-        cursor = db.cursor()
         query = "INSERT INTO patients (Firstname, Lastname, Email, Username, CountryCode, PhoneNumber, Gender, Password) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
         values = (
             firstname,
