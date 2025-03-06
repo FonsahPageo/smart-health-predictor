@@ -19,17 +19,17 @@ pipeline {
 
                     docker system prune -a --volumes -f
 
-                    docker build -t ashprince/predictor:latest -f Dockerfile .
-                    docker-compose -f docker-compose.yaml up -d
+                    // docker build -t ashprince/predictor:latest -f Dockerfile .
+                    // docker-compose -f docker-compose.yaml up -d
                 '''
             }
         }
-        stage('Manual Approval') {
-            agent { label 'test' }
-            steps {
-                input message: 'Approve deployment to staging server?', ok: 'Proceed'
-            }
-        }
+        // stage('Manual Approval') {
+        //     agent { label 'test' }
+        //     steps {
+        //         input message: 'Approve deployment to staging server?', ok: 'Proceed'
+        //     }
+        // }
         stage('Copy code to staging server') {
             agent { label 'test' }
             steps {
