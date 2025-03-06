@@ -50,6 +50,6 @@ volumes:
   mysql_data:
 
 networks:
-  motinatech:
+  smart_health:
     name: smart_health
     driver: bridge
