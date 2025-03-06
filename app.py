@@ -156,6 +156,7 @@ db = mysql.connector.connect(
 # defining the different routes of the website
 @app.route("/", methods=["GET", "POST"])
 def registration():
+    cursor = db.cursor()
     create_table_query = """
     CREATE TABLE IF NOT EXISTS patients (
         ID INT AUTO_INCREMENT PRIMARY KEY,
