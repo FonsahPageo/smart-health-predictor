@@ -6,36 +6,32 @@ pipeline {
         PROD_IMAGE = '${DOCKERHUB_ACCOUNT}/predictor-prod:latest'
     }
     stages {
-        stage('Testing environent') {
+        stage('Testing deployment') {
             agent { label 'test' }
             steps {
-                sh 'rm -rf smart-health-predictor'
-                echo 'Cloning GitHub for testing...'
-                sh 'git clone https://github.com/FonsahPageo/smart-health-predictor.git'
-
-                sh 'cd smart-health-predictor'
-
                 sh '''
-                        if [ "$(docker ps -aq)" ]; then
-                            docker stop $(docker ps -aq)
-                        fi
-                    '''
-                sh '''
-                        if [ "$(docker ps -aq)" ]; then
-                            docker rm $(docker ps -aq)
-                        fi
-                    '''
-                sh '''
-                        if [ "$(docker images -q)" ]; then
-                            docker rmi $(docker images -q)
-                        fi
-                    '''
-                sh 'docker system prune -a --volumes -f'
+                    rm -rf smart-health-predictor
+                    git clone https://github.com/FonsahPageo/smart-health-predictor.git
 
-                sh 'docker build -t ashprince/predictor:latest -f Dockerfile .'
-                
-                echo 'Deploying test environment with Docker Compose...'
-                sh 'docker-compose -f docker-compose.yaml up -d'
+                    cd smart-health-predictor
+
+                    if [ "$(docker ps -aq)" ]; then
+                        docker stop $(docker ps -aq)
+                    fi
+
+                    if [ "$(docker ps -aq)" ]; then
+                        docker rm $(docker ps -aq)
+                    fi
+
+                    if [ "$(docker images -q)" ]; then
+                        docker rmi $(docker images -q)
+                    fi
+
+                    docker system prune -a --volumes -f
+
+                    docker build -t ashprince/predictor:latest -f Dockerfile .
+                    docker-compose -f docker-compose.yaml up -d
+                '''
             }
         }
         stage('Manual Approval') {
@@ -44,63 +40,56 @@ pipeline {
                 input message: 'Approve deployment to staging server?', ok: 'Proceed'
             }
         }
-        stage('Staging Deployment') {
+        stage('Copy code to staging server') {
             agent { label 'test' }
             steps {
-                echo 'Copying code to deploy repository and building staging images...'
-                withCredentials([usernamePassword(credentialsId: 'github-token', variable: 'GITHUB_TOKEN')]) {
+                withCredentials([string(credentialsId: 'github-token', variable: 'GITHUB_TOKEN')]) {
                     sh '''
-                    echo ls -al
-                    rm -rf smart-health-deploy
-                    git clone https://FonsahPageo:$GITHUB_TOKEN@github.com/FonsahPageo/smart-health-deploy.git
-                    rm -rf smart-health-predictor/.git
-                    cp -R smart-health-predictor/* smart-health-deploy/
-                    cd smart-health-deploy
-                    git config user.email "ashprincepageo@gmail.com"
-                    git config user.name "FonsahPageo"
-                    git add .
-                    git commit -m "Staging deployment update"
-                    git push https://FonsahPageo:$GITHUB_TOKEN@github.com/FonsahPageo/smart-health-deploy.git
+                        ls -al
+                        rm -rf smart-health-deploy
+                        git clone https://FonsahPageo:$GITHUB_TOKEN@github.com/FonsahPageo/smart-health-deploy.git
+                        rm -rf smart-health-predictor/.git
+                        cp -R smart-health-predictor/* smart-health-deploy/
+                        cd smart-health-deploy
+                        git config user.email "ashprincepageo@gmail.com"
+                        git config user.name "FonsahPageo"
+                        git add .
+                        git commit -m "Staging deployment update"
+                        git push https://FonsahPageo:$GITHUB_TOKEN@github.com/FonsahPageo/smart-health-deploy.git
                     '''
                 }
             }
         }
-        stage('Staging'){
+        stage('Staging deployment'){
             agent { label 'stage'}
             steps{
-                sh 'git clone https://$GIT_USER:$GIT_PASS@github.com/FonsahPageo/smart-health-deploy.git'
-                sh 'docker build -t ${STAGE_IMAGE} smart-health-deploy'
-                echo 'Pushing staging images to DockerHub...'
-                sh 'docker push ${STAGE_IMAGE}'
-                echo 'Deploying staging containers using Kubernetes...'
-                sh 'kubectl apply -f kubernetes/staging-deployment.yaml'
+                withCredentials([string(credentialsId: 'github-token', variable: 'GITHUB_TOKEN')]) {
+                    sh '''
+                        git clone https://FonsahPageo:$GITHUB_TOKEN@github.com/FonsahPageo/smart-health-deploy.git
+                        cd smart-health-deploy
+                        docker build -t ${STAGE_IMAGE} .
+                        docker push ${STAGE_IMAGE}
+                        kubectl delete all --all
+                        kubectl apply -f deployment.yaml
+                    '''
+                }
             }
         }
-        // stage('Production Build') {
-        //     agent { label 'prod' }
-        //     steps {
-        //         echo "Pushing code to stakeholder's repository and building production images..."
-        //         sh '''
-        //           cd Motinatech-Deploy
-        //           git remote add stakeholder https://github.com/stakeholder/repository.git || true
-        //           git push stakeholder master
-        //         '''
-        //         sh 'docker build -t ${FRONTEND_IMAGE_PROD} Motinatech-Deploy/frontend'
-        //         // sh 'docker build -t ${BACKEND_IMAGE_PROD} Motinatech-Deploy/backend'
-                
-        //         echo 'Pushing production images to DockerHub...'
-        //         sh 'docker push ${FRONTEND_IMAGE_PROD}'
-        //         // sh 'docker push ${BACKEND_IMAGE_PROD}'
-        //     }
-        // }
-        // stage('Production Deployment') {
-        //     agent { label 'prod' }
-        //     steps {
-        //         echo 'Pulling production images and deploying production containers...'
-        //         sh 'docker pull ${FRONTEND_IMAGE_PROD}'
-        //         sh 'docker pull ${BACKEND_IMAGE_PROD}'
-        //         sh 'docker-compose -f docker-compose.prod.yml up -d'
-        //     }
-        // }
+        stage('Production deployment') {
+            agent { label 'prod' }
+            steps {
+                withCredentials([string(credentialsId: 'github-token', variable: 'GITHUB_TOKEN')]) {
+                    sh '''
+                        rm -rf smart-health-deploy
+                        git clone https://FonsahPageo:$GITHUB_TOKEN@github.com/FonsahPageo/smart-health-deploy.git
+                        cd smart-health-deploy
+                        docker build -t ${PROD_IMAGE} .
+                        docker push ${PROD_IMAGE}
+                        kubectl delete all --all
+                        kubectl apply -f deployment.yaml
+                    '''
+                }
+            }
+        }
     }
 }
