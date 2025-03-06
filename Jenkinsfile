@@ -54,8 +54,8 @@ pipeline {
                         rm -rf smart-health-deploy
                         git clone https://github.com/FonsahPageo/smart-health-deploy.git
                         cd smart-health-deploy
-                        docker build -t ${STAGE_IMAGE} .
-                        docker push ${STAGE_IMAGE}
+                        docker build -t ashprince/predictor-stage:latest .
+                        docker push ashprince/predictor-stage:latest
                         kubectl delete all --all
                         kubectl apply -f deployment.yaml
                     '''
