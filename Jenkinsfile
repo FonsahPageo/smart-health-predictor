@@ -60,7 +60,8 @@ pipeline {
                         kubectl apply -f deployment.yaml
                     '''
                 }
-            
+            }
+        }
             // just to make a change on repository
         stage('Production deployment') {
             agent { label 'prod' }
