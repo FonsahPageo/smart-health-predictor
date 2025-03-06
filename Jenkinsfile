@@ -50,7 +50,7 @@ pipeline {
             steps{
                 withCredentials([string(credentialsId: 'github_token', variable: 'GITHUB_TOKEN')]) {
                     sh '''
-                        r -rf smart-health-deploy
+                        rm -rf smart-health-deploy
                         git clone https://github.com/FonsahPageo/smart-health-deploy.git
                         cd smart-health-deploy
                         docker build -t ${STAGE_IMAGE} .
