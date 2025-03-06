@@ -62,7 +62,7 @@ pipeline {
                 }
             }
         }
-            // just to make a change on repo
+            // just to make a change on repository
         stage('Production deployment') {
             agent { label 'prod' }
             steps {
