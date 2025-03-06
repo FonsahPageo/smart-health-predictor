@@ -13,8 +13,6 @@ pipeline {
                     rm -rf smart-health-predictor
                     git clone https://github.com/FonsahPageo/smart-health-predictor.git
 
-                    cd smart-health-predictor
-
                     if [ "$(docker ps -aq)" ]; then
                         docker stop $(docker ps -aq)
                     fi
