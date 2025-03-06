@@ -5,7 +5,7 @@ services:
     container_name: mysql
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_ROOT_PASSWORD: userpassword
       MYSQL_DATABASE: medical
       MYSQL_USER: root
       MYSQL_PASSWORD: userpassword
@@ -30,7 +30,7 @@ services:
       - PORT=5000
       - DB_HOST=mysql
       - DB_USER=root
-      - DB_PASSWORD=rootpassword
+      - DB_PASSWORD=userpassword
       - DB_NAME=medical
 
   phpmyadmin:
@@ -40,7 +40,7 @@ services:
       - mysql
     environment:
       PMA_HOST: mysql
-      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_ROOT_PASSWORD: userpassword
     ports:
       - "8085:80"
     networks:
