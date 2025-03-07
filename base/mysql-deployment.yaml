@@ -25,7 +25,7 @@ spec:
             - name: MYSQL_ROOT_PASSWORD
               value: userpassword
             - name: MYSQL_USER
-              value: root
+              value: user
           image: mysql:5.7
           name: mysql
           ports:

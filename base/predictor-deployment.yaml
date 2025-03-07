@@ -23,7 +23,7 @@ spec:
             - name: DB_PASSWORD
               value: userpassword
             - name: DB_USER
-              value: root
+              value: user
             - name: FLASK_ENV
               value: development
             - name: PORT

@@ -37,17 +37,17 @@ pipeline {
         //         }
         //     }
         // }
-        stage('SonarQube Analysis') {
-            agent { label 'sonar'}
-            steps {
-                script {
-                    def scannerHome = tool 'SonarScanner'
-                    withSonarQubeEnv('sonar_token') {
-                        sh "${scannerHome}/bin/sonar-scanner"
-                    }
-                }
-            }
-        }
+        // stage('SonarQube Analysis') {
+        //     agent { label 'sonar'}
+        //     steps {
+        //         script {
+        //             def scannerHome = tool 'SonarScanner'
+        //             withSonarQubeEnv('sonar_token') {
+        //                 sh "${scannerHome}/bin/sonar-scanner"
+        //             }
+        //         }
+        //     }
+        // }
         stage('Manual Approval to staging') {
             agent { label 'test' }
             steps {
