@@ -22,7 +22,7 @@ pipeline {
                     docker build -t ashprince/predictor:latest -f predictor/Dockerfile predictor
 
                     # Bring up the testing deployment using Docker Compose
-                    docker-compose -f docker-compose.yaml up -d
+                    kustomize build overlays/testing | docker-compose -f docker-compose.yaml up -d
                 '''
             }
         }
