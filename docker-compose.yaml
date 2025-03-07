@@ -1,0 +1,54 @@
+version: "2.3"
+services:
+  mysql:
+    image: mysql:5.7
+    container_name: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: medical
+      MYSQL_PASSWORD: userpassword
+    ports:
+      - "3306:3306"
+    networks:
+      - smart_health
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  predictor:
+    image: ashprince/predictor:latest
+    container_name: predictor
+    depends_on:
+      - mysql
+    ports:
+      - "5000:5000"
+    networks:
+      - smart_health
+    environment:
+      - FLASK_ENV=development
+      - PORT=5000
+      - DB_HOST=mysql
+      - DB_USER=user
+      - DB_PASSWORD=userpassword
+      - DB_NAME=medical
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    depends_on:
+      - mysql
+    environment:
+      PMA_HOST: mysql
+      MYSQL_ROOT_PASSWORD: userpassword
+    ports:
+      - "8085:80"
+    networks:
+      - smart_health
+
+volumes:
+  mysql_data:
+
+networks:
+  smart_health:
+    name: smart_health
+    driver: bridge
