@@ -1,0 +1,5 @@
+bases:
+  - ../../base
+
+patchesStrategicMerge:
+  - production-patch.yaml

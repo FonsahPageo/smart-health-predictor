@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    io.kompose.service: predictor
+  name: predictor
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: predictor
+  template:
+    metadata:
+      labels:
+        io.kompose.service: predictor
+    spec:
+      containers:
+        - env:
+            - name: DB_HOST
+              value: mysql
+            - name: DB_NAME
+              value: medical
+            - name: DB_PASSWORD
+              value: userpassword
+            - name: DB_USER
+              value: root
+            - name: FLASK_ENV
+              value: development
+            - name: PORT
+              value: "5000"
+          image: ashprince/predictor:latest
+          name: predictor
+          ports:
+            - containerPort: 5000
+              protocol: TCP
+      restartPolicy: Always

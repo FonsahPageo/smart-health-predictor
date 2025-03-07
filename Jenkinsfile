@@ -2,8 +2,6 @@ pipeline {
     agent none
     environment {
         DOCKERHUB_ACCOUNT = 'ashprince'
-        STAGE_IMAGE = '${DOCKERHUB_ACCOUNT}/predictor-stage:latest'
-        PROD_IMAGE = '${DOCKERHUB_ACCOUNT}/predictor-prod:latest'
     }
     stages {
         stage('Testing deployment') {
@@ -12,20 +10,42 @@ pipeline {
                 sh '''
                     rm -rf smart-health-predictor
                     git clone --branch deployment https://github.com/FonsahPageo/smart-health-predictor.git
+                    cd smart-health-predictor
 
+                    # Clean up Docker containers, images, and volumes (optional)
                     docker stop $(docker ps -aq) 2>/dev/null || true
                     docker rm $(docker ps -aq) 2>/dev/null || true
                     docker rmi $(docker images -q) 2>/dev/null || true
                     docker system prune -a --volumes -f
+
+                    # Build the image from the predictor folder
+                    docker build -t ashprince/predictor:latest -f predictor/Dockerfile predictor
+
+                    # Bring up the testing deployment using Docker Compose
+                    docker-compose -f docker-compose.yaml up -d
                 '''
             }
         }
-        // stage('Manual Approval') {
-        //     agent { label 'test' }
-        //     steps {
-        //         input message: 'Approve deployment to staging server?', ok: 'Proceed'
-        //     }
-        // }
+        stage('SonarQube Analysis') {
+            agent { label 'test' }
+            steps {
+                withSonarQubeEnv('SonarQube') {
+                    sh '''
+                        sonar-scanner \
+                          -Dsonar.projectKey=smart-health-predictor \
+                          -Dsonar.sources=. \
+                          -Dsonar.host.url=$SONAR_HOST_URL \
+                          -Dsonar.login=$SONAR_AUTH_TOKEN
+                    '''
+                }
+            }
+        }
+        stage('Manual Approval') {
+            agent { label 'test' }
+            steps {
+                input message: 'Approve deployment to staging server?', ok: 'Proceed'
+            }
+        }
         stage('Copy code to staging server') {
             agent { label 'test' }
             steps {
@@ -46,23 +66,31 @@ pipeline {
                 }
             }
         }
-        stage('Staging deployment'){
-            agent { label 'stage'}
-            steps{
+        stage('Staging deployment') {
+            agent { label 'stage' }
+            steps {
                 withCredentials([string(credentialsId: 'github_token', variable: 'GITHUB_TOKEN')]) {
                     sh '''
                         rm -rf smart-health-deploy
                         git clone https://github.com/FonsahPageo/smart-health-deploy.git
                         cd smart-health-deploy
-                        docker build -t ashprince/predictor-stage:latest .
+                        
+                        docker build -t ashprince/predictor-stage:latest -f predictor/Dockerfile predictor
                         docker push ashprince/predictor-stage:latest
-                        kubectl delete all --all
-                        kubectl apply -f deployment.yaml
+                        
+                        kubectl delete all --all || true
+                        
+                        kustomize build overlays/staging | kubectl apply -f -
                     '''
                 }
             }
         }
-            // just to make a change on repository
+        stage('Manual Approval') {
+            agent { label 'stage' }
+            steps {
+                input message: 'Approve deployment to production server?', ok: 'Proceed'
+            }
+        }
         stage('Production deployment') {
             agent { label 'prod' }
             steps {
@@ -71,10 +99,13 @@ pipeline {
                         rm -rf smart-health-deploy
                         git clone --branch main https://github.com/FonsahPageo/smart-health-deploy.git
                         cd smart-health-deploy
-                        docker build -t ashprince/predictor-prod:latest .
+                        
+                        docker build -t ashprince/predictor-prod:latest -f predictor/Dockerfile predictor
                         docker push ashprince/predictor-prod:latest
-                        kubectl delete all --all
-                        kubectl apply -f deployment.yaml
+                        
+                        kubectl delete all --all || true
+                        
+                        kustomize build overlays/production | kubectl apply -f -
                     '''
                 }
             }
