@@ -18,7 +18,7 @@ pipeline {
                     docker system prune -a --volumes -f
 
                     docker build -t ashprince/predictor:latest -f predictor/Dockerfile predictor
-                    kustomize build overlays/testing | docker-compose -f docker-compose.yaml up -d
+                    docker-compose -f docker-compose.yaml up -d
                 '''
             }
         }
