@@ -38,6 +38,7 @@ pipeline {
         //     }
         // }
         stage('SonarQube Analysis') {
+            agent { label 'sonar'}
             steps {
                 script {
                     def scannerHome = tool 'SonarScanner'
