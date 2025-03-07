@@ -12,24 +12,20 @@ pipeline {
                     git clone --branch deployment https://github.com/FonsahPageo/smart-health-predictor.git
                     cd smart-health-predictor
 
-                    # Clean up Docker containers, images, and volumes (optional)
                     docker stop $(docker ps -aq) 2>/dev/null || true
                     docker rm $(docker ps -aq) 2>/dev/null || true
                     docker rmi $(docker images -q) 2>/dev/null || true
                     docker system prune -a --volumes -f
 
-                    # Build the image from the predictor folder
                     docker build -t ashprince/predictor:latest -f predictor/Dockerfile predictor
-
-                    # Bring up the testing deployment using Docker Compose
                     kustomize build overlays/testing | docker-compose -f docker-compose.yaml up -d
                 '''
             }
         }
         stage('SonarQube Analysis') {
-            agent { label 'test' }
+            agent { label 'sonar' }
             steps {
-                withSonarQubeEnv('SonarQube') {
+                withSonarQubeEnv('sonar_token') {
                     sh '''
                         sonar-scanner \
                           -Dsonar.projectKey=smart-health-predictor \
