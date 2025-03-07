@@ -24,6 +24,7 @@ pipeline {
         }
         // stage('SonarQube Analysis') {
         //     agent { label 'sonar' }
+        //     def scannerHome = tool 'SonarScanner';
         //     steps {
         //         withSonarQubeEnv('sonar_token') {
         //             sh '''
@@ -36,6 +37,12 @@ pipeline {
         //         }
         //     }
         // }
+        stage('SonarQube Analysis') {
+            def scannerHome = tool 'SonarScanner';
+            withSonarQubeEnv('sonar_token') {
+                sh "${scannerHome}/bin/sonar-scanner"
+            }
+        }
         stage('Manual Approval to staging') {
             agent { label 'test' }
             steps {

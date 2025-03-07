@@ -29,7 +29,7 @@ services:
       - FLASK_ENV=development
       - PORT=5000
       - DB_HOST=mysql
-      - DB_USER=root
+      - DB_USER=user
       - DB_PASSWORD=userpassword
       - DB_NAME=medical
 
