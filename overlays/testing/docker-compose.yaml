@@ -5,9 +5,8 @@ services:
     container_name: mysql
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: userpassword
+      MYSQL_ROOT_PASSWORD: rootpassword
       MYSQL_DATABASE: medical
-      MYSQL_USER: user
       MYSQL_PASSWORD: userpassword
     ports:
       - "3306:3306"

@@ -34,8 +34,6 @@ spec:
               value: "userpassword"
             - name: MYSQL_DATABASE
               value: "medical"
-            - name: MYSQL_USER
-              value: "user"
             - name: MYSQL_PASSWORD
               value: "userpassword"
           volumeMounts:

@@ -1,10 +1,10 @@
 resources:
-  - mysql-deployment.yaml
-  - mysql-service.yaml
-  - predictor-deployment.yaml
-  - predictor-service.yaml
-  - phpmyadmin-deployment.yaml
-  - phpmyadmin-service.yaml
-  - mysql-data-persistentvolumeclaim.yaml
+- mysql-deployment.yaml
+- mysql-service.yaml
+- predictor-deployment.yaml
+- predictor-service.yaml
+- phpmyadmin-deployment.yaml
+- phpmyadmin-service.yaml
+- mysql-data-persistentvolumeclaim.yaml
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
