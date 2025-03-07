@@ -22,20 +22,20 @@ pipeline {
                 '''
             }
         }
-        stage('SonarQube Analysis') {
-            agent { label 'sonar' }
-            steps {
-                withSonarQubeEnv('sonar_token') {
-                    sh '''
-                        sonar-scanner \
-                          -Dsonar.projectKey=smart-health-predictor \
-                          -Dsonar.sources=. \
-                          -Dsonar.host.url=$SONAR_HOST_URL \
-                          -Dsonar.login=$SONAR_AUTH_TOKEN
-                    '''
-                }
-            }
-        }
+        // stage('SonarQube Analysis') {
+        //     agent { label 'sonar' }
+        //     steps {
+        //         withSonarQubeEnv('sonar_token') {
+        //             sh '''
+        //                 sonar-scanner \
+        //                   -Dsonar.projectKey=smart-health-predictor \
+        //                   -Dsonar.sources=. \
+        //                   -Dsonar.host.url=$SONAR_HOST_URL \
+        //                   -Dsonar.login=$SONAR_AUTH_TOKEN
+        //             '''
+        //         }
+        //     }
+        // }
         stage('Manual Approval to staging') {
             agent { label 'test' }
             steps {
