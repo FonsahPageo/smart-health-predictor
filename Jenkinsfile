@@ -46,6 +46,7 @@ pipeline {
                 input message: 'Approve deployment to staging server?', ok: 'Proceed'
             }
         }
+        // just a change on the repo
         stage('Copy code to staging server') {
             agent { label 'test' }
             steps {
