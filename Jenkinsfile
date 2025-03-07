@@ -40,7 +40,7 @@ pipeline {
                 }
             }
         }
-        stage('Manual Approval') {
+        stage('Manual Approval to staging') {
             agent { label 'test' }
             steps {
                 input message: 'Approve deployment to staging server?', ok: 'Proceed'
@@ -85,7 +85,7 @@ pipeline {
                 }
             }
         }
-        stage('Manual Approval') {
+        stage('Manual Approval to deployment') {
             agent { label 'stage' }
             steps {
                 input message: 'Approve deployment to production server?', ok: 'Proceed'
