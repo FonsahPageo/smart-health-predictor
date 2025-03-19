@@ -80,14 +80,14 @@ spec:
               value: "development"
             - name: PORT
               value: "5000"
-            - name: DB_HOST
-              value: "mysql"
-            - name: DB_USER
-              value: "user"
-            - name: DB_PASSWORD
-              value: "userpassword"
-            - name: DB_NAME
+            - name: MYSQL_ROOT_PASSWORD
+              value: "rootpassword"
+            - name: MYSQL_DATABASE
               value: "medical"
+            - name: MYSQL_USER
+              value: "user"
+            - name: MYSQL_PASSWORD
+              value: "userpassword"
 ---
 apiVersion: v1
 kind: Service
@@ -101,7 +101,7 @@ spec:
     - protocol: TCP
       port: 5000
       targetPort: 5000
-      nodePort: 30000
+      nodePort: 31000
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -126,7 +126,7 @@ spec:
             - name: PMA_HOST
               value: "mysql"
             - name: MYSQL_ROOT_PASSWORD
-              value: "userpassword"
+              value: "rootpassword"
 ---
 apiVersion: v1
 kind: Service
@@ -140,4 +140,9 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: 80
-      nodePort: 30805
+      nodePort: 31805
+---
+volumes:
+    - name: mysql-data
+      persistentVolumeClaim:
+        claimName: mysql-pvc

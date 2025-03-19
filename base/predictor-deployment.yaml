@@ -20,10 +20,10 @@ spec:
               value: mysql
             - name: DB_NAME
               value: medical
-            - name: DB_PASSWORD
-              value: userpassword
             - name: DB_USER
               value: user
+            - name: DB_PASSWORD
+              value: userpassword
             - name: FLASK_ENV
               value: development
             - name: PORT

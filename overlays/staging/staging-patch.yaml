@@ -34,6 +34,8 @@ spec:
               value: "rootpassword"
             - name: MYSQL_DATABASE
               value: "medical"
+            - name: MYSQL_USER
+              value: "user"
             - name: MYSQL_PASSWORD
               value: "userpassword"
           volumeMounts:
@@ -126,7 +128,7 @@ spec:
             - name: PMA_HOST
               value: "mysql"
             - name: MYSQL_ROOT_PASSWORD
-              value: "userpassword"
+              value: "rootpassword"
 ---
 apiVersion: v1
 kind: Service
@@ -137,7 +139,8 @@ spec:
     app: phpmyadmin
   type: NodePort
   ports:
-    - protocol: TCP
+    - name: http
+      protocol: TCP
       port: 80
       targetPort: 80
       nodePort: 30805

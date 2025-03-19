@@ -2,10 +2,10 @@ pipeline {
     agent none
     environment {
         DOCKERHUB_ACCOUNT = 'ashprince'
+        SONARQUBE_SERVER_NAME = 'SonarQube'
     }
     stages {
         stage('Testing deployment') {
-            agent { label 'test' }
             steps {
                 sh '''
                     rm -rf smart-health-predictor
@@ -23,39 +23,40 @@ pipeline {
                 '''
             }
         }
-        // stage('SonarQube Analysis') {
-        //     agent { label 'sonar' }
-        //     def scannerHome = tool 'SonarScanner';
-        //     steps {
-        //         withSonarQubeEnv('sonar_token') {
-        //             sh '''
-        //                 sonar-scanner \
-        //                   -Dsonar.projectKey=smart-health-predictor \
-        //                   -Dsonar.sources=. \
-        //                   -Dsonar.host.url=$SONAR_HOST_URL \
-        //                   -Dsonar.login=$SONAR_AUTH_TOKEN
-        //             '''
-        //         }
-        //     }
-        // }
-        // stage('SonarQube Analysis') {
-        //     agent { label 'sonar'}
-        //     steps {
-        //         script {
-        //             def scannerHome = tool 'SonarScanner'
-        //             withSonarQubeEnv('sonar_token') {
-        //                 sh "${scannerHome}/bin/sonar-scanner"
-        //             }
-        //         }
-        //     }
-        // }
+
+        stage('SonarQube Analysis') {
+            def scannerHome = tool 'SonarScanner';
+            steps {
+                withSonarQubeEnv('SonarQube') {
+                    sh '''
+                        sonar-scanner \
+                          -Dsonar.projectKey=smart-health \
+                          -Dsonar.sources=. \
+                          -Dsonar.host.url=$SONAR_HOST_URL \
+                          -Dsonar.login=$SONAR_AUTH_TOKEN
+                    '''
+                }
+            }
+        }
+
+        stage('Quality Gate') {
+            agent { label 'built-in' }
+            steps {
+                timeout(time: 5, unit: 'MINUTES') {
+                    waitForQualityGate abortPipeline: true
+                }
+            }
+        }
+
         stage('Manual Approval to staging') {
             agent { label 'test' }
             steps {
                 input message: 'Approve deployment to staging server?', ok: 'Proceed'
             }
         }
+
         // just a change on the repo
+
         stage('Copy code to staging server') {
             agent { label 'test' }
             steps {
@@ -76,6 +77,7 @@ pipeline {
                 }
             }
         }
+
         stage('Staging deployment') {
             agent { label 'stage' }
             steps {
@@ -89,12 +91,12 @@ pipeline {
                         docker push ashprince/predictor-stage:latest
                         
                         kubectl delete all --all || true
-                        
-                        kustomize build overlays/staging | kubectl apply -f -
+                        kubectl apply -k overlays/staging
                     '''
                 }
             }
         }
+
         stage('Manual Approval to deployment') {
             agent { label 'stage' }
             steps {
@@ -114,8 +116,7 @@ pipeline {
                         docker push ashprince/predictor-prod:latest
                         
                         kubectl delete all --all || true
-                        
-                        kustomize build overlays/production | kubectl apply -f -
+                        kubectl apply -k overlays/production
                     '''
                 }
             }

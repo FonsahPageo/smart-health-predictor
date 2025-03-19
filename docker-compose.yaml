@@ -1,4 +1,4 @@
-version: "2.3"
+# version: "2.3"
 services:
   mysql:
     image: mysql:5.7
@@ -10,14 +10,17 @@ services:
       MYSQL_USER: user
       MYSQL_PASSWORD: userpassword
     ports:
-      - "3306:3306"
+      - "3307:3306"
     networks:
       - smart_health
     volumes:
       - mysql_data:/var/lib/mysql
 
   predictor:
-    image: ashprince/predictor:latest
+    # image: ashprince/predictor:latest
+    build:
+      context: /predictor
+      dockerfile: Dockerfile
     container_name: predictor
     depends_on:
       - mysql
@@ -26,12 +29,12 @@ services:
     networks:
       - smart_health
     environment:
-      - FLASK_ENV=development
-      - PORT=5000
-      - DB_HOST=mysql
-      - DB_USER=user
-      - DB_PASSWORD=userpassword
-      - DB_NAME=medical
+      FLASK_ENV: development
+      PORT: 5000
+      DB_HOST: mysql
+      DB_USER: user
+      DB_PASSWORD: userpassword
+      DB_NAME: medical
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
@@ -40,14 +43,40 @@ services:
       - mysql
     environment:
       PMA_HOST: mysql
-      MYSQL_ROOT_PASSWORD: userpassword
+      MYSQL_ROOT_PASSWORD: rootpassword
     ports:
       - "8085:80"
     networks:
       - smart_health
 
+  jenkins:
+    build:
+      context: .
+      dockerfile: Dockerfile.jenkins
+    container_name: jenkins
+    user: root
+    ports:
+      - "8088:8088"
+      - "50000:50000"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./inventory/hosts.ini:/var/jenkins_home/ansible/inventory/hosts.ini
+      - /c/Users/ashpr/.ssh/FansoPageo:/var/jenkins_home/.ssh/FansoPageo
+    environment:
+      - JAVA_OPTS=-Xms512m -Xmx2048m
+      - JENKINS_OPTS=--httpPort=8088
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "sleep 30 && curl --fail http://localhost:8088/login || exit 1"]
+      interval: 30s
+      retries: 3
+    networks:
+      - smart_health
+
 volumes:
   mysql_data:
+  jenkins_home:
 
 networks:
   smart_health:

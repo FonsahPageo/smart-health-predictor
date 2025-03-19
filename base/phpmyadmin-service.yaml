@@ -6,8 +6,8 @@ metadata:
   name: phpmyadmin
 spec:
   ports:
-    - name: "8085"
-      port: 8085
+    - name: http
+      port: 80
       targetPort: 80
   selector:
     io.kompose.service: phpmyadmin

@@ -149,7 +149,7 @@ app = Flask(__name__)
 
 app.secret_key = "ash_key"
 db = mysql.connector.connect(
-    host="mysql", user="medical_user", password="medicalpass", database="medical"
+    host="mysql", user="user", password="userpassword", database="medical"
 )
 
 # defining the different routes of the website
