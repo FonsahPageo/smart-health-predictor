@@ -1,5 +1,5 @@
 pipeline {
-    agent none
+    agent any
     environment {
         DOCKERHUB_ACCOUNT = 'ashprince'
         SONARQUBE_SERVER_NAME = 'SonarQube'
