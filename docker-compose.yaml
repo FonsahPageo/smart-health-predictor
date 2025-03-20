@@ -19,7 +19,7 @@ services:
   predictor:
     # image: ashprince/predictor:latest
     build:
-      context: /predictor
+      context: ./predictor
       dockerfile: Dockerfile
     container_name: predictor
     depends_on:
