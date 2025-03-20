@@ -40,7 +40,7 @@ pipeline {
         }
 
         stage('Quality Gate') {
-            agent { label 'built-in' }
+            // agent { label 'built-in' }
             steps {
                 timeout(time: 5, unit: 'MINUTES') {
                     waitForQualityGate abortPipeline: true
@@ -49,7 +49,7 @@ pipeline {
         }
 
         stage('Manual Approval to staging') {
-            agent { label 'test' }
+            // agent { label 'test' }
             steps {
                 input message: 'Approve deployment to staging server?', ok: 'Proceed'
             }
@@ -58,7 +58,7 @@ pipeline {
         // just a change on the repo
 
         stage('Copy code to staging server') {
-            agent { label 'test' }
+            // agent { label 'test' }
             steps {
                 withCredentials([string(credentialsId: 'github_token', variable: 'GITHUB_TOKEN')]) {
                     sh '''
@@ -79,7 +79,7 @@ pipeline {
         }
 
         stage('Staging deployment') {
-            agent { label 'stage' }
+            // agent { label 'stage' }
             steps {
                 withCredentials([string(credentialsId: 'github_token', variable: 'GITHUB_TOKEN')]) {
                     sh '''
@@ -98,13 +98,13 @@ pipeline {
         }
 
         stage('Manual Approval to deployment') {
-            agent { label 'stage' }
+            // agent { label 'stage' }
             steps {
                 input message: 'Approve deployment to production server?', ok: 'Proceed'
             }
         }
         stage('Production deployment') {
-            agent { label 'prod' }
+            // agent { label 'prod' }
             steps {
                 withCredentials([string(credentialsId: 'github_token', variable: 'GITHUB_TOKEN')]) {
                     sh '''
