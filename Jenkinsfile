@@ -29,7 +29,6 @@ pipeline {
                           -Dsonar.host.url=$SONAR_HOST_URL \
                           -Dsonar.login=$SONAR_AUTH_TOKEN \
                           -Dsonar.language=web \
-                          -Dsonar.verbose=true
                     '''
                 }
             }
@@ -38,7 +37,7 @@ pipeline {
         stage('Quality Gate') {
             // agent { label 'built-in' }
             steps {
-                timeout(time: 5, unit: 'MINUTES') {
+                timeout(time: 8, unit: 'MINUTES') {
                     waitForQualityGate abortPipeline: true
                 }
             }
