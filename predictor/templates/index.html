@@ -1,72 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Smart Health Predictor</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
-    <script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script>
-    <script src="https://kit.fontawesome.com/275b79e2bf.js" crossorigin="anonymous"></script>
-</head>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+    <script
+      type="text/javascript"
+      src="{{ url_for('static', filename='script.js') }}"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      crossorigin="anonymous"
+    ></script>
+  </head>
 
-<body>
+  <body>
     <!-- <div w3-include-html="header.html"></div> -->
     {% include 'header.html' %}
 
     <div class="content">
-        <div id="main">
-            <div>
-                <h1><b>Welcome to Smart Health Predictor</b></h1>
-            </div>
+      <div id="main">
+        <div>
+          <h1><b>Welcome to Smart Health Predictor</b></h1>
         </div>
+      </div>
 
-        <section class="section-1">
-            <div class="box">
-                <form action="{{ url_for('predictor') }}">
-                    <h2>What are you feeling today? </h2>
-                    <p>Click here to interact with the diagnosis system</p>
-                    <button type="submit">Check Symptoms <i class="fa-solid fa-arrows-rotate"></i></button>
-                </form>
-            </div>
-            <div class="box">
-                <form action="{{ url_for('consultation') }}">
-                    <h2>Talk with a Doctor specialized in your case</h2>
-                    <p>Click here to see various doctors you can talk to</p>
-                    <button type="submit">Submit <i class="fa-sharp fa-solid fa-paper-plane"></i></button>
-                </form>
-            </div>
-            <div class="box">
-                <form action="{{ url_for('news') }}">
-                    <h2>Health tips and health news</h2>
-                    <p>Click here for recent events and tips for a health lifestyle</p>
-                    <button type="submit">Submit <i class="fa-sharp fa-solid fa-paper-plane"></i></button>
-                </form>
-            </div>
-        </section>
+      <section class="section-1">
+        <div class="box">
+          <form action="{{ url_for('predictor') }}">
+            <h2>What are you feeling today?</h2>
+            <p>Click here to interact with the diagnosis system</p>
+            <button type="submit">
+              Check Symptoms <i class="fa-solid fa-arrows-rotate"></i>
+            </button>
+          </form>
+        </div>
+        <div class="box">
+          <form action="{{ url_for('consultation') }}">
+            <h2>Talk with a Doctor specialized in your case</h2>
+            <p>Click here to see various doctors you can talk to</p>
+            <button type="submit">
+              Submit <i class="fa-sharp fa-solid fa-paper-plane"></i>
+            </button>
+          </form>
+        </div>
+        <div class="box">
+          <form action="{{ url_for('news') }}">
+            <h2>Health tips and health news</h2>
+            <p>Click here for recent events and tips for a health lifestyle</p>
+            <button type="submit">
+              Submit <i class="fa-sharp fa-solid fa-paper-plane"></i>
+            </button>
+          </form>
+        </div>
+      </section>
 
-        <section class="section-1">
-            <div>
-                <p>If you find yourself in need of medical attention and you don't know what to do,
-                    our system will be able to help anaylyze and interpret your health situation. <br>
-                    But the results you obtain from here are not conclusive and can never compare to the diagnosis of
-                    a doctor or physician. Therefore, you are strongly advised to visit a hospital or clinic for proper
-                    checkup
-                    and diagnosis with tests and examinatiions carried out to accurately determine your illness.</p>
-                <p> Also, we can help you find a doctor that will respond to you and give you instant medical advice
-                    and directives on what to do next or where to go.</p>
-                <p>Click <a href="{{ url_for('consultation') }}">here</a> or switch to the consultation tab to talk with
-                    a doctor</p>
-                <p>Choose a doctor specialized in your case for better diagnosis</p>
-                <p>We bring you daily tips that can improve your health and inform you of the latest happenings in the
-                    world
-                    of
-                    medicine so stay tuned to our news section and always stay updated.
-                </p>
-
-            </div>
-        </section>
+      <section class="section-1">
+        <div>
+          <p>
+            If you find yourself in need of medical attention and you don't know
+            what to do, our system will be able to help anaylyze and interpret
+            your health situation. <br />
+            But the results you obtain from here are not conclusive and can
+            never compare to the diagnosis of a doctor or physician. Therefore,
+            you are strongly advised to visit a hospital or clinic for proper
+            checkup and diagnosis with tests and examinatiions carried out to
+            accurately determine your illness.
+          </p>
+          <p>
+            Also, we can help you find a doctor that will respond to you and
+            give you instant medical advice and directives on what to do next or
+            where to go.
+          </p>
+          <p>
+            Click <a href="{{ url_for('consultation') }}">here</a> or switch to
+            the consultation tab to talk with a doctor
+          </p>
+          <p>Choose a doctor specialized in your case for better diagnosis</p>
+          <p>
+            We bring you daily tips that can improve your health and inform you
+            of the latest happenings in the world of medicine so stay tuned to
+            our news section and always stay updated.
+          </p>
+        </div>
+      </section>
     </div>
 
     {% include 'footer.html' %}
@@ -74,6 +97,5 @@
     <script>
         includeHTML();
     </script> -->
-</body>
-
+  </body>
 </html>

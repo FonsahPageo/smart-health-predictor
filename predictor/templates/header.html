@@ -1,50 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title></title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='header.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='footer.css') }}">
-    <script src="https://kit.fontawesome.com/275b79e2bf.js" crossorigin="anonymous"></script>
-</head>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='header.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='footer.css') }}"
+    />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      crossorigin="anonymous"
+    ></script>
+  </head>
 
-<body>
-
+  <body>
     <header>
-        <nav id="main-navbar">
-            <div class="logo">
-                <img src="{{ url_for('static', filename='images/phone-doctor.png') }}" class="logo" alt="Logo">
-            </div>
-            <div>
-                <ul class="nav-links">
-                    <li><a href="{{ url_for('index') }}"><i class="fa-solid fa-house"></i> Home</a></li>
-                    <li><a href="{{ url_for('predictor') }}"><i class="fa-solid fa-heart-circle-check"></i> Predictor</a></li>
-                    <li><a href="{{ url_for('consultation') }}"><i class="fa-sharp fa-solid fa-hospital-user"></i> Consultation</a></li>
-                    <li><a href="{{ url_for('news') }}"><i class="fa-solid fa-newspaper"></i> Newsletter</a></li>
-                    <li><a href="{{ url_for('patient') }}"><i class="fa-solid fa-user"></i> Account</a></li>
-                    <li><a href="{{ url_for('logout') }}">Logout</a></li>
-                </ul>
-                <div class="burger">
-                    <div class="line"></div>
-                    <div class="line"></div>
-                    <div class="line"></div>
-                </div>
-            </div>
-            
-        </nav>
+      <nav id="main-navbar">
+        <div class="logo">
+          <img
+            src="{{ url_for('static', filename='images/phone-doctor.png') }}"
+            class="logo"
+            alt="Logo"
+          />
+        </div>
+        <div>
+          <ul class="nav-links">
+            <li>
+              <a href="{{ url_for('index') }}"
+                ><i class="fa-solid fa-house"></i> Home</a
+              >
+            </li>
+            <li>
+              <a href="{{ url_for('predictor') }}"
+                ><i class="fa-solid fa-heart-circle-check"></i> Predictor</a
+              >
+            </li>
+            <li>
+              <a href="{{ url_for('consultation') }}"
+                ><i class="fa-sharp fa-solid fa-hospital-user"></i>
+                Consultation</a
+              >
+            </li>
+            <li>
+              <a href="{{ url_for('news') }}"
+                ><i class="fa-solid fa-newspaper"></i> Newsletter</a
+              >
+            </li>
+            <li>
+              <a href="{{ url_for('patient') }}"
+                ><i class="fa-solid fa-user"></i> Account</a
+              >
+            </li>
+            <li><a href="{{ url_for('logout') }}">Logout</a></li>
+          </ul>
+          <div class="burger">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+          </div>
+        </div>
+      </nav>
     </header>
     <script>
-        const burger = document.querySelector('.burger');
-        const nav = document.querySelector('.nav-links');
+      const burger = document.querySelector(".burger");
+      const nav = document.querySelector(".nav-links");
 
-        burger.addEventListener('click', () => {
-            nav.classList.toggle('nav-active');
-            burger.classList.toggle('active');
-        });
+      burger.addEventListener("click", () => {
+        nav.classList.toggle("nav-active");
+        burger.classList.toggle("active");
+      });
     </script>
-</body>
-
+  </body>
 </html>

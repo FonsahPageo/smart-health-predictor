@@ -1,49 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Profile</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
-    <script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script>
-    <script src="https://kit.fontawesome.com/275b79e2bf.js" crossorigin="anonymous"></script>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+    <script
+      type="text/javascript"
+      src="{{ url_for('static', filename='script.js') }}"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      crossorigin="anonymous"
+    ></script>
+  </head>
 
-</head>
-
-<body>
+  <body>
     <!-- <div w3-include-html="header.html"></div> -->
     {% include 'header.html' %}
 
     <div class="container">
-        <div id="view-profile">
-            <h2>View Profile</h2>
-            <form action="" method="POST">
-                <p>Name: <span id="name"></span></p>
-                <p>Email: <span id="email"></span></p>
-                <p>Phone: <span id="phone"></span></p>
-                <p>Address: <span id="address"></span></p>
-                <button type="submit" id="edit-btn">Edit Profile</button>
-            </form>
-        </div>
-        <div id="edit-profile">
-            <h2>Edit Profile</h2>
-            <form>
-                <label for="profile-pic">Profile Picture:</label>
-                <input type="file" id="profile-pic" name="profile-pic">
-                <label for="name-input">Name:</label>
-                <input type="text" id="name-input" name="name" placeholder="Enter your name">
-                <label for="email-input">Email:</label>
-                <input type="email" id="email-input" name="email" placeholder="Enter your email">
-                <label for="phone-input">Phone:</label>
-                <input type="tel" id="phone-input" name="phone" placeholder="Enter your phone number">
-                <label for="address-input">Address:</label>
-                <input type="text" id="address-input" name="address" placeholder="Enter your address">
-                <button type="submit" id="save-btn">Save Changes</button>
-                <button type="button" id="cancel-btn">Cancel</button>
-            </form>
-        </div>
+      <div id="view-profile">
+        <h2>View Profile</h2>
+        <form action="" method="POST">
+          <p>Name: <span id="name"></span></p>
+          <p>Email: <span id="email"></span></p>
+          <p>Phone: <span id="phone"></span></p>
+          <p>Address: <span id="address"></span></p>
+          <button type="submit" id="edit-btn">Edit Profile</button>
+        </form>
+      </div>
+      <div id="edit-profile">
+        <h2>Edit Profile</h2>
+        <form>
+          <label for="profile-pic">Profile Picture:</label>
+          <input type="file" id="profile-pic" name="profile-pic" />
+          <label for="name-input">Name:</label>
+          <input
+            type="text"
+            id="name-input"
+            name="name"
+            placeholder="Enter your name"
+          />
+          <label for="email-input">Email:</label>
+          <input
+            type="email"
+            id="email-input"
+            name="email"
+            placeholder="Enter your email"
+          />
+          <label for="phone-input">Phone:</label>
+          <input
+            type="tel"
+            id="phone-input"
+            name="phone"
+            placeholder="Enter your phone number"
+          />
+          <label for="address-input">Address:</label>
+          <input
+            type="text"
+            id="address-input"
+            name="address"
+            placeholder="Enter your address"
+          />
+          <button type="submit" id="save-btn">Save Changes</button>
+          <button type="button" id="cancel-btn">Cancel</button>
+        </form>
+      </div>
     </div>
 
     {% include 'footer.html' %}
@@ -51,6 +79,5 @@
     <script>
         includeHTML();
     </script> -->
-</body>
-
+  </body>
 </html>
