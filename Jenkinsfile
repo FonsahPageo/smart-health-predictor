@@ -27,7 +27,9 @@ pipeline {
                           -Dsonar.projectKey=smart-health \
                           -Dsonar.sources=predictor/templates \
                           -Dsonar.host.url=$SONAR_HOST_URL \
-                          -Dsonar.login=$SONAR_AUTH_TOKEN
+                          -Dsonar.login=$SONAR_AUTH_TOKEN \
+                          -Dsonar.language=web \
+                          -Dsonar.verbose=true
                     '''
                 }
             }
