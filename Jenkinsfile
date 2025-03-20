@@ -12,9 +12,9 @@ pipeline {
                     git clone --branch deployment https://github.com/FonsahPageo/smart-health-predictor.git
                     cd smart-health-predictor
 
-                    // docker stop $(docker ps -aq) 2>/dev/null || true
-                    // docker rm $(docker ps -aq) 2>/dev/null || true
-                    // docker rmi $(docker images -q) 2>/dev/null || true
+                    docker stop $(docker ps -aq) 2>/dev/null || true
+                    docker rm $(docker ps -aq) 2>/dev/null || true
+                    docker rmi $(docker images -q) 2>/dev/null || true
                     docker-compose down -v
                     docker system prune -a --volumes -f
 
